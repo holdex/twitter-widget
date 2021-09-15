@@ -1,0 +1,52 @@
+{
+  "name": "twitter-widget",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "start": "sirv public --no-clear",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
+  },
+  "svelte": "src/index.ts",
+  "module": "dist/index.mjs",
+  "main": "dist/index.js",
+  "types": "./src/index.d.ts",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.0",
+    "@rollup/plugin-typescript": "^8.0.0",
+    "@tsconfig/svelte": "^2.0.0",
+    "rollup": "^2.3.4",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-svelte": "^7.0.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "sass": "^1.41.0",
+    "svelte": "^3.0.0",
+    "svelte-as-markup-preprocessor": "^0.2.0",
+    "svelte-check": "^2.0.0",
+    "svelte-preprocess": "^4.0.0",
+    "svelte-preprocess-cssmodules": "^2.0.2",
+    "tslib": "^2.0.0",
+    "typescript": "^4.0.0"
+  },
+  "dependencies": {
+    "axios": "^0.21.4",
+    "cheerio": "^1.0.0-rc.3",
+    "date-fns": "^2.9.0",
+    "dotenv": "^8.2.0",
+    "github-slugger": "^1.3.0",
+    "mdast-util-to-string": "^1.0.7",
+    "rehype-parse": "^6.0.2",
+    "rehype-raw": "^4.0.1",
+    "rehype-sanitize": "^3.0.0",
+    "remark-parse": "^7.0.2",
+    "remark-rehype": "^8.0.0",
+    "unified": "^8.4.2",
+    "unist-util-visit": "^2.0.2",
+    "@mapbox/rehype-prism": "^0.4.0",
+    "hast-util-sanitize": "^4.0.0",
+    "sirv-cli": "^1.0.0"
+  }
+}

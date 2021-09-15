@@ -1,0 +1,39 @@
+.tweet
+    display: flex
+    flex-direction: column
+    max-width: 500px
+    min-width: 220px
+    margin: 1rem auto
+
+    @import "./components/layout/light"
+
+    &--dark
+        @import "./components/layout/dark"
+
+    & :global(*),
+    & :global(*::before),
+    & :global(*::after)
+        margin: 0
+        padding: 0
+        box-sizing: inherit
+
+    @media (max-width: 600px)
+        max-width: 300px
+
+    .button
+        color: var(--tweet-font-color)
+        font-size: 0.875rem
+        padding: 0.5rem 1rem
+        margin-bottom: 1.5rem
+        background: transparent
+        border: var(--tweet-border)
+        border-radius: 5px
+        outline: none
+        cursor: pointer
+        align-self: center
+
+    &:hover
+        border: var(--tweet-border-hover)
+
+    .dark-button:hover
+        box-shadow: 0 0 0 1px var(--accents-2)
