@@ -1,5 +1,5 @@
-<script lang="ts">
-    export let tweet: any;
+<script>
+    export let tweet;
 
     const url = `https://twitter.com/${tweet.username}`;
     const avatar = tweet.avatar.normal;

@@ -1,15 +1,7 @@
-<script lang="ts">
+<script>
     import formatDistanceStrict from "date-fns/formatDistanceStrict";
 
-    const data: Data = $$props.data;
-
-    type Data = {
-        options: Array<{
-            label: string;
-            votes: number;
-        }>;
-        endsAt: string;
-    };
+    const data = $$props.data;
 
     const votesCount = data.options.reduce(
         (count, option) => count + option.votes,
@@ -18,9 +10,9 @@
     const endsAt = new Date(data.endsAt);
     const now = new Date();
 
-    $: optionWidth = (option: any) =>
+    $: optionWidth = (option) =>
         Math.round((option.votes / votesCount) * 100) || 1;
-    $: optionWidthLabel = (option: any) =>
+    $: optionWidthLabel = (option) =>
         Math.round((option.votes / votesCount) * 100) || 0;
 </script>
 

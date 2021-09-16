@@ -1,8 +1,8 @@
-<script lang="ts">
-    export let tag: string;
-    export let className: string = undefined;
+<script>
+    export let tag;
+    export let className = undefined;
 
-    let content: any;
+    let content;
     function uplift(node, _) {
         // content will only be defined after the first render, so all logic can be done in update
         return {

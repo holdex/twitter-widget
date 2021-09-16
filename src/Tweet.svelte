@@ -1,10 +1,10 @@
-<script lang="ts">
+<script>
     import Node from "./components/html/node.svelte";
     import components from "./components/twitter-layout";
 
-    export let ast: any;
-    export let skeleton: boolean;
-    export let theme: string = "light";
+    export let ast;
+    export let skeleton;
+    export let theme = "light";
 
     const TweetSkeleton = components.TweetSkeleton;
 </script>

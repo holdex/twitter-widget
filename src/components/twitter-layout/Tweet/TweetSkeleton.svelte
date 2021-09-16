@@ -1,7 +1,7 @@
-<script lang="ts">
+<script>
     import Skeleton from "../skeleton/index.svelte";
 
-    export let simple: boolean = false;
+    export let simple = false;
 </script>
 
 <style>

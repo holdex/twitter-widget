@@ -1,9 +1,8 @@
-<script lang="ts">
+<script>
     import Node from "../../html/node.svelte";
     import components from "..";
 
-    export let ast: any;
+    export let ast;
 </script>
-
 
 <Node {components} node={ast} />

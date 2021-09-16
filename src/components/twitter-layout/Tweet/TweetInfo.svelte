@@ -1,8 +1,8 @@
-<script lang="ts">
+<script>
     import format from "date-fns/format";
     import { formatNumber } from "../../lib/utils";
 
-    export let tweet: any;
+    export let tweet;
 
     const likeUrl = `https://twitter.com/intent/like?tweet_id=${tweet.id}`;
     const tweetUrl = `https://twitter.com/${tweet.username}/status/${tweet.id}`;

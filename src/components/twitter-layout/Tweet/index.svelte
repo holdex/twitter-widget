@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
     import TweetHeader from "./TweetHeader.svelte";
     import TweetInfo from "./TweetInfo.svelte";
     import TweetAction from "./TweetAction.svelte";

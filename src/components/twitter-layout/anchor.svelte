@@ -21,7 +21,7 @@
     };
 </script>
 
-<script lang="ts">
+<script>
     const { href, title, className } = $$props;
 </script>
 

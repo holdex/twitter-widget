@@ -1,7 +1,7 @@
-<script lang="ts">
+<script>
     import { formatNumber } from "../../lib/utils";
 
-    export let tweet: any;
+    export let tweet;
 
     const userUrl = `https://twitter.com/${tweet.username}`;
     const tweetUrl = `${userUrl}/status/${tweet.id}`;

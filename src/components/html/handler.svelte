@@ -1,5 +1,5 @@
-<script context="module" lang="ts">
-    function getContainerClassName(dataType: string) {
+<script context="module">
+    function getContainerClassName(dataType) {
         if (!dataType) return;
 
         const [type, count] = dataType.split(" ");
@@ -13,7 +13,7 @@
         }
     }
 
-    function handleProps(n: any) {
+    function handleProps(n) {
         const props = { ...n.props };
 
         // Always send className as a string
@@ -28,11 +28,11 @@
     }
 </script>
 
-<script lang="ts">
+<script>
     import CustomElement from "./customElement.svelte";
 
-    export let node: any;
-    export let components: any;
+    export let node;
+    export let components;
 
     let props = handleProps(node);
     const { data } = props;
@@ -44,7 +44,7 @@
 {:else if node.tag === "div"}
     {#if type === "tweet"}
         <svelte:component this={components.Tweet} {...props}>
-            {#if node?.nodes && Array.isArray(node.nodes)}
+            {#if node && node.nodes && Array.isArray(node.nodes)}
                 {#each node.nodes as child}
                     <svelte:self node={child} {components} />
                 {/each}
@@ -52,7 +52,7 @@
         </svelte:component>
     {:else if type === "pool-container"}
         <svelte:component this={components.Pool} {...props}>
-            {#if node?.nodes && Array.isArray(node.nodes)}
+            {#if node && node.nodes && Array.isArray(node.nodes)}
                 {#each node.nodes as child}
                     <svelte:self node={child} {components} />
                 {/each}
@@ -64,7 +64,7 @@
             clasName={getContainerClassName(type)}
             {...props}
         >
-            {#if node?.nodes && Array.isArray(node.nodes)}
+            {#if node && node.nodes && Array.isArray(node.nodes)}
                 {#each node.nodes as child}
                     <svelte:self node={child} {components} />
                 {/each}
@@ -102,7 +102,7 @@
         <svelte:component this={components.EmbeddedTweet} {...props} />
     {:else}
         <svelte:component this={components.a} {...props}>
-            {#if node?.nodes && Array.isArray(node.nodes)}
+            {#if node && node.nodes && Array.isArray(node.nodes)}
                 {#each node.nodes as child}
                     <svelte:self node={child} {components} />
                 {/each}
@@ -110,12 +110,12 @@
         </svelte:component>
     {/if}
 {:else if node.tag === "blockquote"}
-    {#if props.data?.ast}
+    {#if props.data && props.data.ast}
         <svelte:component
             this={components.EmbeddedTweet}
-            ast={props.data?.ast[0]}
+            ast={props.data.ast[0]}
         />
-    {:else if props.className?.includes("Tweet")}
+    {:else if props.className && props.className.includes("Tweet")}
         <svelte:component
             this={components.Tweet}
             node={node.nodes}
@@ -123,7 +123,7 @@
         />
     {:else}
         <svelte:component this={components.blockquote} {...props}>
-            {#if node?.nodes && Array.isArray(node.nodes)}
+            {#if node && node.nodes && Array.isArray(node.nodes)}
                 {#each node.nodes as child}
                     <svelte:self node={child} {components} />
                 {/each}
@@ -132,7 +132,7 @@
     {/if}
 {:else if components[node.tag]}
     <svelte:component this={components[node.tag]} {...props}>
-        {#if node?.nodes && Array.isArray(node.nodes)}
+        {#if node && node.nodes && Array.isArray(node.nodes)}
             {#each node.nodes as child}
                 <svelte:self node={child} {components} />
             {/each}
@@ -140,7 +140,7 @@
     </svelte:component>
 {:else}
     <CustomElement tag={node.tag} {...props}>
-        {#if node?.nodes && Array.isArray(node.nodes)}
+        {#if node && node.nodes && Array.isArray(node.nodes)}
             {#each node.nodes as child}
                 <svelte:self node={child} {components} />
             {/each}
