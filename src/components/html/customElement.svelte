@@ -3,7 +3,7 @@
     export let tag;
     export let className = undefined;
 
-    let component;
+    let component = null;
 
     onMount(async () => {
         let module = await import(`svelte-elements/src/${tag}.svelte`);
