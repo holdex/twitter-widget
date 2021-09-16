@@ -24,10 +24,10 @@ export default function rehypeTweet(context) {
     function visitData(node) {
         const ctx = context.get(node.properties.dataId);
 
-        if (ctx?.data) node.data = ctx.data;
+        if (ctx && ctx.data) node.data = ctx.data;
 
         // Add markdown content to the tweet container
-        if (ctx?.nodes) {
+        if (ctx && ctx.nodes) {
             node.children.unshift(...ctx.nodes);
         }
 
