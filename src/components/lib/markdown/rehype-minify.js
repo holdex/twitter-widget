@@ -3,7 +3,7 @@ function minifyAst(ast) {
         return ast.reduce((nodes, node) => {
             const n = minifyAst(node);
             // Empty new lines aren't required
-            const isNoise = n === '\n' && nodes[nodes.length - 1]?.tag !== 'span';
+            const isNoise = n === '\n' && nodes[nodes.length - 1] && nodes[nodes.length - 1].tag !== 'span';
 
             if (!isNoise) nodes.push(n);
 
@@ -19,7 +19,7 @@ function minifyAst(ast) {
     }
     if (ast.type === 'element') {
         const node = { tag: ast.tagName };
-        const children = ast.children?.length ? minifyAst(ast.children) : [];
+        const children = ast.children && ast.children.length ? minifyAst(ast.children) : [];
 
         if (ast.properties && Object.keys(ast.properties).length) {
             node.props = ast.properties;
