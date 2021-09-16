@@ -34,7 +34,7 @@ function serve() {
 }
 
 export default {
-	input: 'src/index.ts',
+	input: 'src/index.js',
 	output: [
 		{ file: pkg.module, format: 'es' },
 		{ file: pkg.main, format: 'umd', name: pkg.name },
