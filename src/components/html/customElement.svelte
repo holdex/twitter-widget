@@ -1,9 +1,14 @@
 <script>
-    import * as elements from "svelte-elements/src";
+    import { onMount } from "svelte";
     export let tag;
     export let className = undefined;
 
-    let component = elements[tag];
+    let component;
+
+    onMount(async () => {
+        let module = await import(`svelte-elements/src/${tag}.svelte`);
+        component = module.default;
+    });
 </script>
 
 <svelte this={component} class={className}>
