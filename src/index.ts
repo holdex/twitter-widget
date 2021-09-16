@@ -1,1 +1,1 @@
-export { default as default } from './Tweet.svelte';
+export { default as default } from './components/lib/fetchAst';
