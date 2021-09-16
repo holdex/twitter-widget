@@ -121,7 +121,7 @@ function getTweetContent($) {
         const props = this.attribs;
 
         // Handle emojis inside the text
-        if (props.class?.includes('Emoji--forText')) {
+        if (props.class && props.class.includes('Emoji--forText')) {
             this.attribs = {
                 'data-type': 'emoji-for-text',
                 src: props.src,

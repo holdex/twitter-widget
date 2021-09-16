@@ -3,12 +3,12 @@ import fetch from "../fetch";
 const API_URL = 'https://api.twitter.com';
 const SYNDICATION_URL = 'https://syndication.twitter.com';
 
-function twitterLabsEnabled(expansions: string) {
+function twitterLabsEnabled(expansions) {
     if (!expansions) return true;
     return String("attachments.poll_ids").includes(expansions);
 }
 
-export async function fetchTweetsHtml(ids: string) {
+export async function fetchTweetsHtml(ids) {
     const res = await fetch(`${SYNDICATION_URL}/tweets.json?ids=${ids}`);
 
     // if (res.data) return res.data;
@@ -18,12 +18,12 @@ export async function fetchTweetsHtml(ids: string) {
     throw new Error(`Fetch for the embedded tweets of "${ids}" failed with code: ${res.status}`);
 }
 
-export async function fetchTweetHtml(id: string) {
+export async function fetchTweetHtml(id) {
     const html = await fetchTweetsHtml(id);
     return html[id];
 }
 
-export async function fetchUserStatus(tweetId: string) {
+export async function fetchUserStatus(tweetId) {
     // If there isn't an API token don't do anything, this is only required for videos.
     if (!process.env.TWITTER_API_TOKEN) return;
 
@@ -46,7 +46,7 @@ export async function fetchUserStatus(tweetId: string) {
     throw new Error(`Fetch to the Twitter API failed with code: ${res.status}`);
 }
 
-export async function fetchTweetWithPoll(tweetId: string) {
+export async function fetchTweetWithPoll(tweetId) {
     const expansions = 'attachments.poll_ids';
 
     // If there isn't an API token or Twitter Labs is not enabled, don't do anything,
@@ -72,7 +72,7 @@ export async function fetchTweetWithPoll(tweetId: string) {
     throw new Error(`Fetch to the Twitter Labs API failed with code: ${res.status}`);
 }
 
-export async function getEmbeddedTweetHtml(url: string) {
+export async function getEmbeddedTweetHtml(url) {
     const res = await fetch(`https://publish.twitter.com/oembed?url=${url}`);
 
     if (res.ok) return res.json();
