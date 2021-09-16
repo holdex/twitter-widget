@@ -11,6 +11,6 @@
     });
 </script>
 
-<svelte this={component} class={className}>
+<svelte:component this={component} class={className}>
     <slot />
-</svelte>
+</svelte:component>
