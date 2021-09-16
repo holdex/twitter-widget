@@ -5,8 +5,10 @@ import { getTweetData } from './twitter/tweetHtmlEmbed';
 import getTweetHtml from './twitter/parseHtml';
 
 class Context {
-    slugger = new GithubSlugger();
-    map = [];
+    constructor() {
+        this.slugger = new GithubSlugger();
+        this.map = [];
+    }
     get(id) {
         return this.map[Number(id)];
     }
