@@ -5,7 +5,6 @@ import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
-import css from 'rollup-plugin-css-only';
 import json from '@rollup/plugin-json';
 
 import pkg from './package.json';
@@ -47,6 +46,7 @@ export default {
 					includePaths: ['src', 'node_modules'],
 				},
 			}),
+			emitCss: false,
 			compilerOptions: {
 				// enable run-time checks when not in production
 				dev: !production
@@ -54,8 +54,6 @@ export default {
 		}),
 		// we'll extract any component CSS out into
 		// a separate file - better for performance
-		css(),
-
 		// If you have external dependencies installed from
 		// npm, you'll most likely need these plugins. In
 		// some cases you'll need additional configuration -
