@@ -6,6 +6,7 @@ import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
+import json from '@rollup/plugin-json';
 
 import pkg from './package.json';
 
@@ -64,6 +65,7 @@ export default {
 			browser: true,
 			dedupe: ['svelte']
 		}),
+		json(),
 		commonjs(),
 		typescript({
 			sourceMap: !production,
