@@ -99,7 +99,7 @@
             children={node.nodes}
         />
     {:else if type === "quote-tweet"}
-        <svelte:component this={components.EmbeddedTweet} {...props} />
+        <svelte:self {...props} {components} />
     {:else}
         <svelte:component this={components.a} {...props}>
             {#if node && node.nodes && Array.isArray(node.nodes)}
@@ -111,10 +111,7 @@
     {/if}
 {:else if node.tag === "blockquote"}
     {#if props.data && props.data.ast}
-        <svelte:component
-            this={components.EmbeddedTweet}
-            ast={props.data.ast[0]}
-        />
+        <svelte:self node={props.data.ast[0]} {components} />
     {:else if props.className && props.className.includes("Tweet")}
         <svelte:component
             this={components.Tweet}

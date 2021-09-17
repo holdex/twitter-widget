@@ -24,7 +24,7 @@ export default async function fetchAst(tweetId) {
     if (!tweet) return;
 
     const context = new Context();
-    const html = await getTweetHtml(tweet, context);
+    const html = await getTweetHtml(tweet, context, this);
     const ast = await htmlToAst(html, context);
     return ast;
 }

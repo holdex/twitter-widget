@@ -9,7 +9,6 @@ import Img from './img.svelte';
 import { Mention, Hashtag, Cashtag, Emoji, Poll } from './Twitter';
 import Tweet from './Tweet/index.svelte';
 import TweetSkeleton from './skeleton/index.svelte';
-import EmbeddedTweet from './EmbedTweet/index.svelte';
 
 export default {
     div: Div,
@@ -48,5 +47,4 @@ export default {
 
     Tweet,
     TweetSkeleton,
-    EmbeddedTweet,
 };

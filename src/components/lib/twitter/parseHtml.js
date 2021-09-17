@@ -1,7 +1,6 @@
 import fetch from '../fetch';
 import { getVideo } from './tweet-html';
 import { fetchUserStatus, getEmbeddedTweetHtml, fetchTweetWithPoll } from './api';
-import fetchTweetAst from '../fetchAst';
 import markdownToAst from '../markdown/markdownToAst';
 
 function getVideoData(userStatus) {
@@ -34,9 +33,9 @@ async function getMediaHtml(tweet) {
     return media;
 }
 
-async function getQuotedTweetHtml({ quotedTweet }, context) {
+async function getQuotedTweetHtml({ quotedTweet }, context, fetcher) {
     if (!quotedTweet) return;
-    const ast = await fetchTweetAst(quotedTweet.id);
+    const ast = await fetcher(quotedTweet.id);
     // The AST of embedded tweets is always sent as data
     return ast && `<blockquote data-id="${context.add({ ast })}"></blockquote>`;
 }
@@ -60,14 +59,14 @@ async function getPollHtml(tweet, context) {
     }
 }
 
-export default async function getTweetHtml(tweet, context) {
+export default async function getTweetHtml(tweet, context, fetcher) {
     const meta = { ...tweet.meta, type: 'tweet' };
     const md = await markdownToAst(tweet.html);
     const html = [
         // md.children is the markdown content, which is later added as children to the container
         `<div data-id="${context.add(meta, md.children)}">`,
         (await getMediaHtml(tweet)) || '',
-        (await getQuotedTweetHtml(tweet, context)) || '',
+        (await getQuotedTweetHtml(fetcher, tweet, context)) || '',
         (await getPollHtml(tweet, context)) || '',
         `</div>`,
     ].join('');
