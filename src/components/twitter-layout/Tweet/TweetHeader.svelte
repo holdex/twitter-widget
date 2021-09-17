@@ -28,6 +28,7 @@
     }
     .author:hover {
         color: var(--tweet-link-color-hover);
+        transition: color 0.3s ease-in-out;
     }
 
     .name,

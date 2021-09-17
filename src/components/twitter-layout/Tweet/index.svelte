@@ -18,6 +18,7 @@
     }
     .tweet:hover {
         border: var(--tweet-border-hover);
+        transition: border-color 0.3s ease-in-out;
     }
     blockquote {
         position: relative;

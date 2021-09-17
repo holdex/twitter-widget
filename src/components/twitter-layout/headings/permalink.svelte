@@ -17,6 +17,7 @@
     a:hover {
         color: inherit;
         border-bottom: 1px solid;
+        transition: color .3s ease-in-out;
     }
     a:hover ~ .permalink {
         visibility: visible;

@@ -1,22 +1,16 @@
 <script>
-    import Node from "./components/html/node.svelte";
-    import components from "./components/twitter-layout";
-
-    export let ast;
-    export let skeleton;
-    export let theme = "light";
-
-    const TweetSkeleton = components.TweetSkeleton;
+    import App from "./App.svelte";
 </script>
 
-<style lang="sass" src="./tweet.sass">
-
+<style lang="sass" global>
+    div *,
+	div	*:before,
+	div *:after
+        margin: 0
+        padding: 0
+        box-sizing: border-box
 </style>
 
-<div class="tweet" class:tweet--dark={theme === "dark"}>
-    {#if skeleton}
-        <TweetSkeleton />
-    {:else}
-        <Node {components} node={ast[0]} />
-    {/if}
+<div>
+    <App {...$$props} />
 </div>

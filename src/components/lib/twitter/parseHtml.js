@@ -66,7 +66,7 @@ export default async function getTweetHtml(tweet, context, fetcher) {
         // md.children is the markdown content, which is later added as children to the container
         `<div data-id="${context.add(meta, md.children)}">`,
         (await getMediaHtml(tweet)) || '',
-        (await getQuotedTweetHtml(fetcher, tweet, context)) || '',
+        (await getQuotedTweetHtml(tweet, context, fetcher)) || '',
         (await getPollHtml(tweet, context)) || '',
         `</div>`,
     ].join('');

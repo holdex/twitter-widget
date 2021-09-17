@@ -22,6 +22,7 @@
         display: flex;
         color: var(--tweet-color-gray);
         margin-right: 0.75rem;
+        transition: color 0.3s ease-in-out;
     }
     .like:visited {
         color: var(--tweet-link-color);
