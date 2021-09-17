@@ -59,12 +59,13 @@ export default {
 				sourceMap: !production,
 				sass: {
 					includePaths: ['src', 'node_modules'],
-				},
+				}
 			}),
 			emitCss: false,
 			compilerOptions: {
 				// enable run-time checks when not in production
-				dev: !production
+				dev: !production,
+				preserveWhitespace: true,
 			},
 		}),
 		// we'll extract any component CSS out into
