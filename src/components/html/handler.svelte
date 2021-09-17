@@ -128,7 +128,11 @@
         </svelte:component>
     {/if}
 {:else if components[node.tag]}
-    <svelte:component this={components[node.tag]} {...props}>
+    <svelte:component
+        this={components[node.tag]}
+        {...props}
+        class={props.className}
+    >
         {#if node && node.nodes && Array.isArray(node.nodes)}
             {#each node.nodes as child}
                 <svelte:self node={child} {components} />

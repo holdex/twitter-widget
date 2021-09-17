@@ -6,8 +6,7 @@
 
     const likeUrl = `https://twitter.com/intent/like?tweet_id=${tweet.id}`;
     const tweetUrl = `https://twitter.com/${tweet.username}/status/${tweet.id}`;
-    const createdAt =
-        typeof window !== "undefined" ? new Date(tweet.createdAt) : null;
+    const createdAt = new Date(tweet.createdAt);
 </script>
 
 <style>

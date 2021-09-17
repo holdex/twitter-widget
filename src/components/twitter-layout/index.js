@@ -9,6 +9,7 @@ import Img from './img.svelte';
 import { Mention, Hashtag, Cashtag, Emoji, Poll } from './Twitter';
 import Tweet from './Tweet/index.svelte';
 import TweetSkeleton from './skeleton/index.svelte';
+import { Br, Span, B, Em, I } from 'svelte-elements/src';
 
 export default {
     div: Div,
@@ -19,6 +20,11 @@ export default {
     h4: H4,
     h5: H5,
     h6: H6,
+    br: Br,
+    span: Span,
+    b: B,
+    em: Em,
+    i: I,
 
     p: P,
     blockquote: Blockquote,
