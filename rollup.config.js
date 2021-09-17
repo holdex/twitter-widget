@@ -35,9 +35,24 @@ function serve() {
 export default {
 	input: 'src/index.js',
 	output: [
-		{ file: pkg.module, format: 'es' },
-		{ file: pkg.main, format: 'umd', name: pkg.name },
+		{
+			file: pkg.module,
+			format: 'es',
+			globals: {
+				'XMLHttpRequest': 'XMLHttpRequest'
+			}
+		},
+		{
+			file: pkg.main,
+			format: 'umd',
+			name: pkg.name,
+			globals: {
+				'XMLHttpRequest': 'XMLHttpRequest'
+			}
+		},
 	],
+	context: 'this',
+	external: ['XMLHttpRequest'],
 	plugins: [
 		svelte({
 			preprocess: sveltePreprocess({

@@ -1,5 +1,4 @@
 import visit from 'unist-util-visit';
-import { toString } from 'mdast-util-to-string';
 
 const TWITTER_URL = 'https://twitter.com';
 const ABSOLUTE_URL = /^https?:\/\/|^\/\//i;
@@ -35,11 +34,11 @@ export default function rehypeTweet(context) {
     }
 
     function visitHeading(node) {
-        const text = toString(node);
+        // const text = toString(node);
 
         if (!text) return;
 
-        const id = context.slugger.slug(text);
+        const id = context.slugger.slug("heading");
 
         node.data = { id };
     }
