@@ -11,6 +11,7 @@
 
 {#if isConversation}
     <a
+        class="exclude"
         href={tweetUrl}
         title="View the conversation on Twitter"
         target="_blank"
@@ -25,6 +26,7 @@
     </a>
 {:else}
     <a
+        class="exclude"
         href={userUrl}
         title={`View ${tweet.name}'s profile on Twitter`}
         target="_blank"

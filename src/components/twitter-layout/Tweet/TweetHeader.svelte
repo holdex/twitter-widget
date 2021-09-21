@@ -6,10 +6,20 @@
 </script>
 
 <div class="header">
-    <a href={url} class="avatar" target="_blank" rel="noopener noreferrer">
+    <a
+        href={url}
+        class="avatar exclude"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
         <img src={avatar} alt={tweet.name} width={36} height={36} />
     </a>
-    <a href={url} class="author" target="_blank" rel="noopener noreferrer">
+    <a
+        href={url}
+        class="author exclude"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
         <span class="name" title={tweet.name}>
             {tweet.name}
         </span>
@@ -17,7 +27,12 @@
             @{tweet.username}
         </span>
     </a>
-    <a href={url} class="brand" target="_blank" rel="noopener noreferrer">
+    <a
+        href={url}
+        class="brand exclude"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
         <div class="icon twitterIcon" title="View on Twitter" role="img" />
     </a>
 </div>

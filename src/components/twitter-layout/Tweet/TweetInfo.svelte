@@ -11,7 +11,7 @@
 
 <div class="info">
     <a
-        class="like"
+        class="like exclude"
         href={likeUrl}
         title="Like"
         target="_blank"
@@ -28,7 +28,7 @@
     </a>
     {#if createdAt}
         <a
-            class="time"
+            class="time exclude"
             href={tweetUrl}
             target="_blank"
             rel="noopener noreferrer"

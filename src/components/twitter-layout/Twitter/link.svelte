@@ -2,7 +2,13 @@
     const { href, title, type } = $$props;
 </script>
 
-<a {href} target="_blank" rel="noopener noreferrer" title={title || href}>
+<a
+    class="exclude"
+    {href}
+    target="_blank"
+    rel="noopener noreferrer"
+    title={title || href}
+>
     <s>{type}</s>
     <b><slot /></b>
 </a>
