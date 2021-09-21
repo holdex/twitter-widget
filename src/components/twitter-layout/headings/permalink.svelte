@@ -17,7 +17,7 @@
         display: block
         position: absolute
         visibility: hidden
-        margin-top: calc(-1 * $heading-margin-top)
+        margin-top: calc(-1 * #{$heading-margin-top})
         padding-top: $heading-margin-top
     a 
         color: inherit
