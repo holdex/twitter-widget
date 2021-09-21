@@ -37,8 +37,6 @@
     let props = handleProps(node);
     const { data } = props;
     const type = props.dataType || (data && data.type);
-
-    console.log("will render", node && typeof node === "string" ? "string" : node.tag);
 </script>
 
 {#if typeof node === "string"}
@@ -141,6 +139,8 @@
             {/each}
         {/if}
     </svelte:component>
+{:else if node.tag === "br"}
+    <br />
 {:else}
     <CustomElement tag={node.tag} {...props}>
         {#if node && node.nodes && Array.isArray(node.nodes)}
