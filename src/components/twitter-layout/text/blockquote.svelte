@@ -2,6 +2,10 @@
     const { className, ...rest } = $$props;
 </script>
 
+<blockquote class={className} {...rest}>
+    <slot />
+</blockquote>
+
 <style>
     blockquote {
         background: var(--accents-1);
@@ -11,7 +15,3 @@
         padding: 0 1.25rem;
     }
 </style>
-
-<blockquote class={className} {...rest}>
-    <slot />
-</blockquote>

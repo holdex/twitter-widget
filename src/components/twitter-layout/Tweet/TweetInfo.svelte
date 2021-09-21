@@ -9,6 +9,40 @@
     const createdAt = new Date(tweet.createdAt);
 </script>
 
+<div class="info">
+    <a
+        class="like"
+        href={likeUrl}
+        title="Like"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        <div class="heart">
+            <div class="icon icon-heart" role="img" />
+        </div>
+        {#if tweet.heartCount || tweet.likes > 0}
+            <span class="likes"
+                >{tweet.heartCount || formatNumber(tweet.likes)}</span
+            >
+        {/if}
+    </a>
+    {#if createdAt}
+        <a
+            class="time"
+            href={tweetUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <time
+                title={`Time Posted: ${createdAt.toUTCString()}`}
+                dateTime={createdAt.toISOString()}
+            >
+                {format(createdAt, "h:mm a - MMM d, y")}
+            </time>
+        </a>
+    {/if}
+</div>
+
 <style>
     a {
         text-decoration: none;
@@ -50,37 +84,3 @@
         text-decoration: underline;
     }
 </style>
-
-<div class="info">
-    <a
-        class="like"
-        href={likeUrl}
-        title="Like"
-        target="_blank"
-        rel="noopener noreferrer"
-    >
-        <div class="heart">
-            <div class="icon icon-heart" role="img" />
-        </div>
-        {#if tweet.heartCount || tweet.likes > 0}
-            <span class="likes"
-                >{tweet.heartCount || formatNumber(tweet.likes)}</span
-            >
-        {/if}
-    </a>
-    {#if createdAt}
-        <a
-            class="time"
-            href={tweetUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            <time
-                title={`Time Posted: ${createdAt.toUTCString()}`}
-                dateTime={createdAt.toISOString()}
-            >
-                {format(createdAt, "h:mm a - MMM d, y")}
-            </time>
-        </a>
-    {/if}
-</div>

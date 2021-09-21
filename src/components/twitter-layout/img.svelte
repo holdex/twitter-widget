@@ -2,6 +2,17 @@
     const { width, height, src, className, alt, ...rest } = $$props;
 </script>
 
+<details style="--height={height}; --width={width};">
+    <summary>
+        <img {...rest} {alt} src={`${src}&name=small`} />
+    </summary>
+
+    <details-dialog>
+        <div class="bg" data-close-dialog />
+        <img {...rest} {alt} src={`${src}&name=large`} {width} {height} />
+    </details-dialog>
+</details>
+
 <style>
     summary {
         position: relative;
@@ -51,14 +62,3 @@
         }
     }
 </style>
-
-<details style="--height={height}; --width={width};">
-    <summary>
-        <img {...rest} {alt} src={`${src}&name=small`} />
-    </summary>
-
-    <details-dialog>
-        <div class="bg" data-close-dialog />
-        <img {...rest} {alt} src={`${src}&name=large`} {width} {height} />
-    </details-dialog>
-</details>

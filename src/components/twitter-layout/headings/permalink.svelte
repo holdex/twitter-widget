@@ -2,6 +2,14 @@
     export let id;
 </script>
 
+<template>
+    <span {id} />
+    <a href={`#${id}`}>
+        <slot />
+    </a>
+    <span class="permalink">#</span>
+</template>
+
 <style>
     span[id] {
         display: block;
@@ -17,7 +25,7 @@
     a:hover {
         color: inherit;
         border-bottom: 1px solid;
-        transition: color .3s ease-in-out;
+        transition: color 0.3s ease-in-out;
     }
     a:hover ~ .permalink {
         visibility: visible;
@@ -36,11 +44,3 @@
         }
     }
 </style>
-
-<template>
-    <span {id} />
-    <a href={`#${id}`}>
-        <slot />
-    </a>
-    <span class="permalink">#</span>
-</template>

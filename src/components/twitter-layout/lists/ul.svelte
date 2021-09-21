@@ -2,6 +2,10 @@
     const { className, ...rest } = $$props;
 </script>
 
+<ul class={className} {...rest}>
+    <slot />
+</ul>
+
 <style>
     ul {
         margin: var(--text-margin);
@@ -15,7 +19,3 @@
         margin-left: -1rem;
     }
 </style>
-
-<ul class={className} {...rest}>
-    <slot />
-</ul>

@@ -2,6 +2,10 @@
     export let style = "";
 </script>
 
+<span class="skeleton" {style}>
+    <slot />
+</span>
+
 <style>
     .skeleton {
         display: block;
@@ -28,7 +32,3 @@
         }
     }
 </style>
-
-<span class="skeleton" {style}>
-    <slot />
-</span>

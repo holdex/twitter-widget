@@ -25,6 +25,20 @@
     const { href, title, className } = $$props;
 </script>
 
+<a
+    {href}
+    target="_blank"
+    rel="noopener noreferrer"
+    title={title || href}
+    class="exclude {className}"
+>
+    {#if $$slots.default === href}
+        {beautifyHref(href)}
+    {:else}
+        <slot />
+    {/if}
+</a>
+
 <style>
     a {
         color: var(--link-color);
@@ -34,17 +48,3 @@
         text-decoration: underline;
     }
 </style>
-
-<a
-    {href}
-    target="_blank"
-    rel="noopener noreferrer"
-    title={title || href}
-    class={className}
->
-    {#if $$slots.default === href}
-        {beautifyHref(href)}
-    {:else}
-        <slot />
-    {/if}
-</a>

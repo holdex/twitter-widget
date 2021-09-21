@@ -2,6 +2,8 @@
     const { className, ...rest } = $$props;
 </script>
 
+<pre class="className" {...rest}><slot /></pre>
+
 <style>
     pre {
         color: var(--code-color);
@@ -13,5 +15,3 @@
         -webkit-overflow-scrolling: touch;
     }
 </style>
-
-<pre class="className" {...rest}><slot /></pre>

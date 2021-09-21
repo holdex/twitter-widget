@@ -6,6 +6,15 @@
     const { data, className } = $$props;
 </script>
 
+<div class="tweet {className}">
+    <blockquote>
+        <TweetHeader tweet={data} />
+        <slot />
+        <TweetInfo tweet={data} />
+    </blockquote>
+    <TweetAction tweet={data} />
+</div>
+
 <style>
     .tweet {
         color: var(--tweet-font-color);
@@ -33,12 +42,3 @@
         background-repeat: no-repeat;
     }
 </style>
-
-<div class="tweet {className}">
-    <blockquote>
-        <TweetHeader tweet={data} />
-        <slot />
-        <TweetInfo tweet={data} />
-    </blockquote>
-    <TweetAction tweet={data} />
-</div>

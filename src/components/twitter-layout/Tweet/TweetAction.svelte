@@ -9,6 +9,33 @@
     const isConversation = tweet.ctaType === "conversation" || count > 4;
 </script>
 
+{#if isConversation}
+    <a
+        href={tweetUrl}
+        title="View the conversation on Twitter"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        <div class="icon icon-reply" />
+        <span class="text">
+            {count ? formatNumber(count) : tweet.ctaCount} people are talking about
+            this
+        </span>
+        <div class="icon icon-chevron" />
+    </a>
+{:else}
+    <a
+        href={userUrl}
+        title={`View ${tweet.name}'s profile on Twitter`}
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        <div class="icon icon-profile" />
+        <span class="text">See {tweet.name}'s other Tweets</span>
+        <div class="icon icon-chevron" />
+    </a>
+{/if}
+
 <style>
     a {
         display: flex;
@@ -43,30 +70,3 @@
         margin-left: 0.25rem;
     }
 </style>
-
-{#if isConversation}
-    <a
-        href={tweetUrl}
-        title="View the conversation on Twitter"
-        target="_blank"
-        rel="noopener noreferrer"
-    >
-        <div class="icon icon-reply" />
-        <span class="text">
-            {count ? formatNumber(count) : tweet.ctaCount} people are talking about
-            this
-        </span>
-        <div class="icon icon-chevron" />
-    </a>
-{:else}
-    <a
-        href={userUrl}
-        title={`View ${tweet.name}'s profile on Twitter`}
-        target="_blank"
-        rel="noopener noreferrer"
-    >
-        <div class="icon icon-profile" />
-        <span class="text">See {tweet.name}'s other Tweets</span>
-        <div class="icon icon-chevron" />
-    </a>
-{/if}

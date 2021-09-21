@@ -2,6 +2,10 @@
     const { className, ...rest } = $$props;
 </script>
 
+<code class={className} {...rest}>
+    <slot />
+</code>
+
 <style>
     code {
         font-size: 14px;
@@ -15,7 +19,3 @@
         white-space: pre-wrap;
     }
 </style>
-
-<code class={className} {...rest}>
-    <slot />
-</code>

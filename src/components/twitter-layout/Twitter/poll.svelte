@@ -16,6 +16,25 @@
         Math.round((option.votes / votesCount) * 100) || 0;
 </script>
 
+<div class="poll">
+    <div class="options">
+        {#each data.options as option}
+            <span class="label">{option.label}</span>
+            <span class="chart" style="width: {optionWidth(option)}" />
+            <span>{optionWidthLabel(option)}%</span>
+        {/each}
+    </div>
+    <hr />
+    <div class="footer">
+        <span class="votes-count">{votesCount} votes</span>
+        <span
+            >{now > endsAt
+                ? "Final results"
+                : `${formatDistanceStrict(endsAt, now)} left`}</span
+        >
+    </div>
+</div>
+
 <style>
     .poll {
         margin: var(--poll-margin);
@@ -56,22 +75,3 @@
         }
     }
 </style>
-
-<div class="poll">
-    <div class="options">
-        {#each data.options as option}
-            <span class="label">{option.label}</span>
-            <span class="chart" style="width: {optionWidth(option)}" />
-            <span>{optionWidthLabel(option)}%</span>
-        {/each}
-    </div>
-    <hr />
-    <div class="footer">
-        <span class="votes-count">{votesCount} votes</span>
-        <span
-            >{now > endsAt
-                ? "Final results"
-                : `${formatDistanceStrict(endsAt, now)} left`}</span
-        >
-    </div>
-</div>
