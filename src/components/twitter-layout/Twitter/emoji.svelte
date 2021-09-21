@@ -8,4 +8,9 @@
         vertical-align: -3px;
         display: inline-flex;
     }
+    img {
+        position: relative;
+        width: 18px;
+        height: 18px;
+    }
 </style>
