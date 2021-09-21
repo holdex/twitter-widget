@@ -39,7 +39,13 @@ export default {
 			file: pkg.module,
 			format: 'es',
 			globals: {
-				'XMLHttpRequest': 'XMLHttpRequest'
+				'XMLHttpRequest': 'XMLHttpRequest',
+				'date-fns/formatDistanceStrict': 'formatDistanceStrict',
+				'date-fns/format': 'format',
+				'axios': 'axios',
+				'remark-parse': 'markdown',
+				'unist-util-is/convert': 'convert$1',
+				'unified': 'unified',
 			}
 		},
 		{
@@ -47,12 +53,18 @@ export default {
 			format: 'umd',
 			name: pkg.name,
 			globals: {
-				'XMLHttpRequest': 'XMLHttpRequest'
+				'XMLHttpRequest': 'XMLHttpRequest',
+				'date-fns/formatDistanceStrict': 'formatDistanceStrict',
+				'date-fns/format': 'format',
+				'axios': 'axios',
+				'remark-parse': 'markdown',
+				'unist-util-is/convert': 'convert$1',
+				'unified': 'unified',
 			}
 		},
 	],
 	context: 'this',
-	external: ['XMLHttpRequest'],
+	external: ['XMLHttpRequest', 'axios', 'unified', 'remark-parse', 'date-fns/format', 'date-fns/formatDistanceStrict', 'unist-util-is/convert'],
 	plugins: [
 		svelte({
 			preprocess: sveltePreprocess({
@@ -65,6 +77,7 @@ export default {
 			compilerOptions: {
 				// enable run-time checks when not in production
 				dev: !production,
+				generate: "ssr",
 				preserveWhitespace: true,
 			},
 		}),
