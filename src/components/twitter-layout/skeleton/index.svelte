@@ -1,34 +1,32 @@
 <script>
+    import { getContext } from "svelte";
+
     export let style = "";
+
+    let theme = getContext("theme");
 </script>
 
-<span class="skeleton" {style}>
+<span class="skeleton {theme}" {style}>
     <slot />
 </span>
 
-<style>
-    .skeleton {
-        display: block;
-        width: 100%;
-        border-radius: 5px;
+<style lang="sass">
+    @import "../../common"
 
-        background-image: linear-gradient(
-            270deg,
-            var(--accents-1),
-            var(--accents-2),
-            var(--accents-2),
-            var(--accents-1)
-        );
-        background-size: 400% 100%;
-        animation: loading 8s ease-in-out infinite;
-    }
+    .skeleton
+        display: block
+        width: 100%
+        border-radius: 5px
+        background-image: linear-gradient(270deg,map-get($light, accents-1),map-get($light, accents-2),map-get($light, accents-2),map-get($light, accents-1))
+        background-size: 400% 100%
+        animation: loading 8s ease-in-out infinite
 
-    @keyframes loading {
-        0% {
-            background-position: 200% 0;
-        }
-        100% {
-            background-position: -200% 0;
-        }
-    }
+    .dark
+        background-image: linear-gradient(90deg,map-get($dark, accents-1),map-get($dark, accents-2),map-get($dark, accents-2),map-get($dark, accents-1))
+
+    @keyframes loading 
+        0%
+            background-position: 200% 0
+        100%
+            background-position: -200% 0
 </style>

@@ -1,3 +1,5 @@
+@import "./components/common"
+
 .tweet
     display: flex
     flex-direction: column
@@ -6,7 +8,8 @@
     min-width: 220px
     margin: 1rem auto
 
-    @import "./components/layout/light"
-
     &--dark
-        @import "./components/layout/dark"
+        box-shadow: none
+
+        & :global(.tweet:hover)
+            box-shadow: 0 0 0 1px map-get($dark, accents-2)

@@ -6,9 +6,10 @@
     <slot />
 </ol>
 
-<style>
-    ol {
-        margin: var(--text-margin);
-        padding-left: 1rem;
-    }
+<style lang="sass">
+    @import "../../common"
+    
+    ol
+        margin: $text-margin
+        padding-left: 1rem
 </style>

@@ -2,11 +2,14 @@
     import TweetHeader from "./TweetHeader.svelte";
     import TweetInfo from "./TweetInfo.svelte";
     import TweetAction from "./TweetAction.svelte";
+    import { getContext } from "svelte";
 
     const { data, className } = $$props;
+
+    let theme = getContext("theme");
 </script>
 
-<div class="tweet {className}">
+<div class="tweet {className} {theme}">
     <blockquote>
         <TweetHeader tweet={data} />
         <slot />
@@ -15,30 +18,39 @@
     <TweetAction tweet={data} />
 </div>
 
-<style>
-    .tweet {
-        color: var(--tweet-font-color);
-        font: var(--tweet-font);
-        overflow: hidden;
-        background: var(--tweet-bg-color);
-        border: var(--tweet-border);
-        border-radius: 5px;
-        margin: var(--container-margin);
-    }
-    .tweet:hover {
-        border: var(--tweet-border-hover);
-        transition: border-color 0.3s ease-in-out;
-    }
-    blockquote {
-        position: relative;
-        padding: 1.25rem 1.25rem 0.625rem 1.25rem;
-    }
+<style lang="sass">
+    @import "../../common"
 
-    .tweet :global(.icon) {
-        display: inline-block;
-        height: 1.25em;
-        vertical-align: text-bottom;
-        background-size: contain;
-        background-repeat: no-repeat;
-    }
+    .tweet
+        color: map-get($light, tweet-font-color)
+        font: $tweet-font
+        overflow: hidden
+        background-color: map-get($light, tweet-bg-color)
+        border: map-get($light, tweet-border)
+        border-radius: 5px
+        margin: $container-margin
+
+        &:hover
+            border: map-get($light, tweet-border-hover)
+            transition: border-color 0.3s ease-in-out
+
+    .dark
+        color: map-get($dark, tweet-font-color)
+        background-color: map-get($dark, tweet-bg-color)
+        border: map-get($dark, tweet-border)
+
+        &:hover
+            border: map-get($dark, tweet-border-hover)
+
+
+    blockquote
+        position: relative
+        padding: 1.25rem 1.25rem 0.625rem 1.25rem
+
+    .tweet :global(.icon)
+        display: inline-block
+        height: 1.25em
+        vertical-align: text-bottom
+        background-size: contain
+        background-repeat: no-repeat
 </style>

@@ -6,9 +6,10 @@
     <slot />
 </li>
 
-<style>
-    li {
-        padding-left: 0;
-        margin: var(--li-margin);
-    }
+<style lang="sass">
+    @import "../../common"
+
+    li
+        padding-left: 0
+        margin: $li-margin
 </style>

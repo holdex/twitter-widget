@@ -22,7 +22,11 @@
 </script>
 
 <script>
+    import { getContext } from "svelte";
+
     const { href, title, className } = $$props;
+
+    let theme = getContext("theme");
 </script>
 
 <a
@@ -30,7 +34,7 @@
     target="_blank"
     rel="noopener noreferrer"
     title={title || href}
-    class="exclude {className}"
+    class="exclude {className} {theme}"
 >
     {#if $$slots.default === href}
         {beautifyHref(href)}
@@ -39,12 +43,16 @@
     {/if}
 </a>
 
-<style>
-    a {
-        color: var(--link-color);
-        text-decoration: none;
-    }
-    a:hover {
-        text-decoration: underline;
-    }
+<style lang="sass">
+    @import "../common"
+
+    a
+        color: map-get($light, link-color)
+        text-decoration: none
+        
+        &:hover
+            text-decoration: underline
+
+    .dark
+        color: map-get($dark, link-color)
 </style>
