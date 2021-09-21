@@ -58,10 +58,10 @@
 
     .chart
         height: 100%
-        background-color: map-get($light, poll-bar-color)
+        background: map-get($light, poll-bar-color)
 
         &.dark
-            background-color: map-get($dark, poll-bar-color)
+            background: map-get($dark, poll-bar-color)
 
     hr
         border: 0

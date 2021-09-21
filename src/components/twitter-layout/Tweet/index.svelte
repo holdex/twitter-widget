@@ -25,7 +25,7 @@
         color: map-get($light, tweet-font-color)
         font: $tweet-font
         overflow: hidden
-        background-color: map-get($light, tweet-bg-color)
+        background: map-get($light, tweet-bg-color)
         border: map-get($light, tweet-border)
         border-radius: 5px
         margin: $container-margin
@@ -36,7 +36,7 @@
 
     .dark
         color: map-get($dark, tweet-font-color)
-        background-color: map-get($dark, tweet-bg-color)
+        background: map-get($dark, tweet-bg-color)
         border: map-get($dark, tweet-border)
 
         &:hover

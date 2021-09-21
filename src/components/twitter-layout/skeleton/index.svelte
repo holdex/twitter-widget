@@ -17,12 +17,12 @@
         display: block
         width: 100%
         border-radius: 5px
-        background-image: linear-gradient(270deg,map-get($light, accents-1),map-get($light, accents-2),map-get($light, accents-2),map-get($light, accents-1))
+        background: linear-gradient(270deg,map-get($light, accents-1),map-get($light, accents-2),map-get($light, accents-2),map-get($light, accents-1))
         background-size: 400% 100%
         animation: loading 8s ease-in-out infinite
 
     .dark
-        background-image: linear-gradient(90deg,map-get($dark, accents-1),map-get($dark, accents-2),map-get($dark, accents-2),map-get($dark, accents-1))
+        background: linear-gradient(90deg,map-get($dark, accents-1),map-get($dark, accents-2),map-get($dark, accents-2),map-get($dark, accents-1))
 
     @keyframes loading 
         0%

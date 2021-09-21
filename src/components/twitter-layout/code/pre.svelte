@@ -13,7 +13,7 @@
     
     pre
         color: map-get($light, code-color)
-        background-color: map-get($light, code-bg-color)
+        background: map-get($light, code-bg-color)
         padding: 1.25rem
         margin: $container-margin
         white-space: pre
@@ -22,5 +22,5 @@
 
     .dark
         color: map-get($dark, code-color)
-        background-color: map-get($dark, code-bg-color)
+        background: map-get($dark, code-bg-color)
 </style>

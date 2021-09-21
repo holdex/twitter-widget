@@ -25,13 +25,13 @@
     @import "../../common"
 
     .container
-        background-color: map-get($light,tweet-bg-color)
+        background: map-get($light,tweet-bg-color)
         border: map-get($light, tweet-border)
         border-radius: 5px
         margin: $container-margin
 
         &.dark
-            background-color: map-get($dark, tweet-bg-color)
+            background: map-get($dark, tweet-bg-color)
             border: map-get($dark, tweet-border)
     
     .content
