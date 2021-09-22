@@ -73,6 +73,7 @@ export default class Twitter {
         const container = document.createElement('div');
         const caption = document.createElement('div');
         const template = document.createElement('template');
+        const content = document.createElement('div');
         const preloader = this.createPreloader();
 
         container.classList.add(this.CSS.baseClass, this.CSS.container, this.CSS.containerLoading);
@@ -84,19 +85,18 @@ export default class Twitter {
         caption.dataset.placeholder = 'Enter a caption';
         caption.innerHTML = this.data.caption || '';
 
-        template.content.firstChild.setAttribute('src', this.data.embed);
-        template.content.firstChild.classList.add(this.CSS.content);
+        content.setAttribute('data-src', this.data.embed);
+        content.classList.add(this.CSS.content);
 
         const embedIsReady = this.embedIsReady(this.data.embed);
 
         embedIsReady
             .then((html) => {
+                content.innerHTML = html;
+                container.appendChild(content);
+                container.appendChild(caption);
                 container.classList.remove(this.CSS.containerLoading);
-                template.innerHTML = html;
             });
-
-        container.appendChild(caption);
-        container.appendChild(template.content.firstChild);
 
         this.element = container;
 
@@ -133,7 +133,6 @@ export default class Twitter {
      */
     onPaste(event) {
         const { key: service, data: url } = event.detail;
-        console.log('paste info', event);
         this.data = {
             service,
             source: url,
@@ -177,8 +176,6 @@ export default class Twitter {
             }, {});
 
         Twitter.fetch = fetch;
-
-        console.log('prepare', Twitter.patterns, Twitter.services);
     }
 
     /**
@@ -187,7 +184,6 @@ export default class Twitter {
      * @returns {object} - object of patterns which contain regx for pasteConfig
      */
     static get pasteConfig() {
-        console.log('paste config', Twitter.patterns);
         return {
             patterns: Twitter.patterns,
         };
