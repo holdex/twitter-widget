@@ -15,7 +15,7 @@
 <div class="header">
     <a
         href={url}
-        class="avatar exclude {theme}"
+        class="avatar exclude {$theme}"
         target="_blank"
         rel="noopener noreferrer"
     >
@@ -23,14 +23,14 @@
     </a>
     <a
         href={url}
-        class="author exclude {theme}"
+        class="author exclude {$theme}"
         target="_blank"
         rel="noopener noreferrer"
     >
         <span class="name" title={tweet.name}>
             {tweet.name}
         </span>
-        <span class="username {theme}" title={`@${tweet.username}`}>
+        <span class="username {$theme}" title={`@${tweet.username}`}>
             @{tweet.username}
         </span>
     </a>

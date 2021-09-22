@@ -6,7 +6,7 @@
     let theme = getContext("theme");
 </script>
 
-<pre class="{className} {theme}" {...rest}><slot /></pre>
+<pre class="{className} {$theme}" {...rest}><slot /></pre>
 
 <style lang="sass">
     @import "../../common"

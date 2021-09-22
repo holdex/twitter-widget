@@ -8,14 +8,14 @@
     let theme = getContext("theme");
 </script>
 
-<div class="container {theme}">
+<div class="container {$theme}">
     <div class="content">
         <Skeleton style="height: 2.25rem" />
         <Skeleton style="height: 7rem; margin: 1.25rem 0" />
         <Skeleton style="height: 1.25rem" />
     </div>
     {#if !simple}
-        <div class="footer {theme}">
+        <div class="footer {$theme}">
             <Skeleton style="height: 1.25rem" />
         </div>
     {/if}

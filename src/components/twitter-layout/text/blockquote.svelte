@@ -6,7 +6,7 @@
     let theme = getContext("theme");
 </script>
 
-<blockquote class="{className} {theme}" {...rest}>
+<blockquote class="{className} {$theme}" {...rest}>
     <slot />
 </blockquote>
 

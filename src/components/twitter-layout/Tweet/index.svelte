@@ -9,7 +9,7 @@
     let theme = getContext("theme");
 </script>
 
-<div class="tweet {className} {theme}">
+<div class="tweet {className} {$theme}">
     <blockquote>
         <TweetHeader tweet={data} />
         <slot />

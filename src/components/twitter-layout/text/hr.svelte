@@ -6,7 +6,7 @@
     let theme = getContext("theme");
 </script>
 
-<hr class="{className} {theme}" {...rest} />
+<hr class="{className} {$theme}" {...rest} />
 
 <style lang="sass">
     @import "../../common"

@@ -1,5 +1,6 @@
 <script>
     import { setContext } from "svelte";
+    import { writable } from "svelte/store";
 
     import Node from "./components/html/node.svelte";
     import components from "./components/twitter-layout";
@@ -9,10 +10,14 @@
     export let theme = "light";
 
     const TweetSkeleton = components.TweetSkeleton;
-    setContext("theme", theme);
+
+    let themeStyle = writable(theme);
+    $: $themeStyle = theme;
+
+    setContext("theme", themeStyle);
 </script>
 
-<div class="tweet" class:tweet--dark={theme === "dark"}>
+<div class="tweet" class:tweet--dark={$themeStyle === "dark"}>
     {#if skeleton}
         <TweetSkeleton />
     {:else}

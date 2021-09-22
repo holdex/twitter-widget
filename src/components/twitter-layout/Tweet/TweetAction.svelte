@@ -22,7 +22,7 @@
 
 {#if isConversation}
     <a
-        class="exclude {theme}"
+        class="exclude {$theme}"
         href={tweetUrl}
         title="View the conversation on Twitter"
         target="_blank"
@@ -47,7 +47,7 @@
     </a>
 {:else}
     <a
-        class="exclude {theme}"
+        class="exclude {$theme}"
         href={userUrl}
         title={`View ${tweet.name}'s profile on Twitter`}
         target="_blank"

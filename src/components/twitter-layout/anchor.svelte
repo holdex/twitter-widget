@@ -34,7 +34,7 @@
     target="_blank"
     rel="noopener noreferrer"
     title={title || href}
-    class="exclude {className} {theme}"
+    class="exclude {className} {$theme}"
 >
     {#if children && children[0] === href}
         {beautifyHref(href)}

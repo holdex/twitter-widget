@@ -6,7 +6,7 @@
     let theme = getContext("theme");
 </script>
 
-<span class="skeleton {theme}" {style}>
+<span class="skeleton {$theme}" {style}>
     <slot />
 </span>
 

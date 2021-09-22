@@ -6,7 +6,7 @@
     let theme = getContext("theme");
 </script>
 
-<ul class="{className} {theme}" {...rest}>
+<ul class="{className} {$theme}" {...rest}>
     <slot />
 </ul>
 

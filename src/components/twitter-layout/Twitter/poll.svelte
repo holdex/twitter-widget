@@ -23,12 +23,12 @@
     <div class="options">
         {#each data.options as option}
             <span class="label">{option.label}</span>
-            <span class="chart {theme}" style="width: {optionWidth(option)}" />
+            <span class="chart {$theme}" style="width: {optionWidth(option)}" />
             <span>{optionWidthLabel(option)}%</span>
         {/each}
     </div>
-    <hr class={theme} />
-    <div class="footer {theme}">
+    <hr class={$theme} />
+    <div class="footer {$theme}">
         <span class="votes-count">{votesCount} votes</span>
         <span
             >{now > endsAt
