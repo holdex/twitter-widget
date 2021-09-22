@@ -1,5 +1,3 @@
-import './index.css';
-
 export default class Twitter {
 
     constructor({ data, api, readOnly }) {
@@ -56,12 +54,12 @@ export default class Twitter {
         return {
             baseClass: this.api.styles.block,
             input: this.api.styles.input,
-            container: 'twitter-tool',
-            containerLoading: 'twitter-tool--loading',
-            preloader: 'twitter-tool__preloader',
-            caption: 'twitter-tool__caption',
-            url: 'twitter-tool__url',
-            content: 'twitter-tool__content',
+            container: 'embed-tool',
+            containerLoading: 'embed-tool--loading',
+            preloader: 'embed-tool__preloader',
+            caption: 'embed-tool__caption',
+            url: 'embed-tool__url',
+            content: 'embed-tool__content',
         };
     }
 
