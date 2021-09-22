@@ -91,10 +91,9 @@ export default class Twitter {
         const embedIsReady = this.embedIsReady(this.data.embed);
 
         let Component = Twitter.component;
-        let app = new Component({ target: content });
         embedIsReady
             .then((ast) => {
-                app.$set({ ast });
+                let app = new Component({ target: content, props: { ast } });
                 container.appendChild(content);
                 container.appendChild(caption);
                 container.classList.remove(this.CSS.containerLoading);
