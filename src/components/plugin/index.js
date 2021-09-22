@@ -32,9 +32,6 @@ export default class Twitter {
         }
     }
 
-    /**
-     * @returns {EmbedData}
-     */
     get data() {
         if (this.element) {
             const caption = this.element.querySelector(`.${this.api.styles.input}`);
@@ -128,11 +125,6 @@ export default class Twitter {
         return preloader;
     }
 
-    /**
-     * Save current content and return EmbedData object
-     *
-     * @returns {EmbedData}
-     */
     save() {
         return this.data;
     }
@@ -145,7 +137,7 @@ export default class Twitter {
     onPaste(event) {
         const { key: service, data: url } = event.detail;
 
-        const { regex, embedUrl, width, height, id = (ids) => ids.shift() } = Embed.services[service];
+        const { regex, embedUrl, width, height, id = (ids) => ids.shift() } = Twitter.services[service];
         const result = regex.exec(url).slice(1);
         const embed = embedUrl.replace(/<%= remote_id %>/g, id(result));
 
@@ -181,7 +173,7 @@ export default class Twitter {
                 }];
             });
 
-        Embed.services = userServices.reduce((result, [key, service]) => {
+        Twitter.services = userServices.reduce((result, [key, service]) => {
             if (!(key in result)) {
                 result[key] = service;
 
@@ -193,16 +185,16 @@ export default class Twitter {
             return result;
         }, {});
 
-        Embed.patterns = userServices
+        Twitter.patterns = userServices
             .reduce((result, [key, item]) => {
                 result[key] = item.regex;
 
                 return result;
             }, {});
 
-        Embed.fetch = fetch;
+        Twitter.fetch = fetch;
 
-        console.log('prepare', Embed.patterns, Embed.services);
+        console.log('prepare', Twitter.patterns, Twitter.services);
     }
 
     /**
@@ -211,9 +203,9 @@ export default class Twitter {
      * @returns {object} - object of patterns which contain regx for pasteConfig
      */
     static get pasteConfig() {
-        console.log('paste config', Embed.patterns);
+        console.log('paste config', Twitter.patterns);
         return {
-            patterns: Embed.patterns,
+            patterns: Twitter.patterns,
         };
     }
 
@@ -233,6 +225,6 @@ export default class Twitter {
      * @returns {Promise<any>} - result that all mutations have finished
      */
     embedIsReady(embedUrl) {
-        return Embed.fetch({ url: embedUrl, method: 'GET' });
+        return Twitter.fetch({ url: embedUrl, method: 'GET' });
     }
 }
