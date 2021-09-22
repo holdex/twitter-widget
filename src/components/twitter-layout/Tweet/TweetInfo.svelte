@@ -11,9 +11,7 @@
     const theme = getContext("theme");
 
     let heartSrc =
-        "https://storage.googleapis.com/stage-holdex-public/assets/heart.png";
-    let heartSrcHover =
-        "https://storage.googleapis.com/stage-holdex-public/assets/heart-hover.png";
+        "https://storage.googleapis.com/stage-holdex-public/assets/heart.png?v=1";
 </script>
 
 <div class="info">
@@ -25,7 +23,6 @@
         rel="noopener noreferrer"
     >
         <span class="heart">
-            <img class="icon icon-heart h" alt="heart" src={heartSrcHover} />
             <img class="icon icon-heart" alt="heart" src={heartSrc} />
         </span>
         {#if tweet.heartCount || tweet.likes > 0}
@@ -66,24 +63,11 @@
         width: 1.25em
         object-fit: contain
 
-    .heart
-        position: relative
-        display: inline-block
-        vertical-align: top
-        width: 1.25em
-        height: 1.25em
-
-        .icon
-            position: absolute
-            margin: 0
-            width: 100%
-            height: 100%
-
     .icon-heart
-        transition: opacity .3s ease-in-out
-
-        &.h
-            opacity: 0
+        width: 1.25em
+        object-fit: cover
+        object-position: 0% 50%
+        transition: object-position .3s ease-in-out
 
     .like
         display: inline-block
@@ -98,10 +82,7 @@
             color: map-get($light, tweet-color-red)!important
 
             .icon-heart
-                opacity: 0
-
-                &.h
-                    opacity: 1!important
+                object-position: 100% 50%
 
         &.dark
             color: map-get($dark, tweet-color-gray)

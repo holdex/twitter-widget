@@ -17,9 +17,7 @@
     let profileSrc =
         "https://storage.googleapis.com/stage-holdex-public/assets/person.png";
     let replySrc =
-        "https://storage.googleapis.com/stage-holdex-public/assets/reply.png";
-    let replySrcHover =
-        "https://storage.googleapis.com/stage-holdex-public/assets/reply-hover.png";
+        "https://storage.googleapis.com/stage-holdex-public/assets/reply.png?v=1";
 </script>
 
 {#if isConversation}
@@ -30,20 +28,12 @@
         target="_blank"
         rel="noopener noreferrer"
     >
-        <span class="icon-wrapper">
-            <img
-                loading="lazy"
-                class="icon icon-reply h"
-                alt="reply"
-                src={replySrcHover}
-            />
-            <img
-                loading="lazy"
-                class="icon icon-reply"
-                alt="reply"
-                src={replySrc}
-            />
-        </span>
+        <img
+            loading="lazy"
+            class="icon icon-reply"
+            alt="reply"
+            src={replySrc}
+        />
         <span class="text">
             {count ? formatNumber(count) : tweet.ctaCount} people are talking about
             this
@@ -95,10 +85,7 @@
             color: map-get($light, tweet-link-color-hover)!important
 
             .icon-reply
-                opacity: 0
-
-                &.h
-                    opacity: 1!important
+                object-position: 100% 50%
 
         &.dark
             color: map-get($dark, tweet-link-color)
@@ -113,24 +100,11 @@
         width: 1.25em
         object-fit: contain
 
-    .icon-wrapper
-        position: relative
-        display: inline-block
-        vertical-align: top
-        width: 1.25em
-        height: 1.25em
-
-        .icon
-            position: absolute
-            margin: 0
-            width: 100%
-            height: 100%
-
     .icon-reply
-        transition: opacity .3s ease-in-out
-
-        &.h
-            opacity: 0
+        width: 1.25em
+        object-fit: cover
+        object-position: 0% 50%
+        transition: object-position .3s ease-in-out
 
     .icon-chevron
         float: right
@@ -138,4 +112,9 @@
 
     .text
         margin-left: 0.25rem
+        display: inline-block
+        max-width: calc(100% - 50px)
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
 </style>
