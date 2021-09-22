@@ -149,6 +149,8 @@ export default class Twitter {
         const result = regex.exec(url).slice(1);
         const embed = embedUrl.replace(/<%= remote_id %>/g, id(result));
 
+        console.log('paste info', event);
+
         this.data = {
             service,
             source: url,
@@ -199,6 +201,8 @@ export default class Twitter {
             }, {});
 
         Embed.fetch = fetch;
+
+        console.log('prepare', Embed.patterns, Embed.services);
     }
 
     /**
@@ -207,6 +211,7 @@ export default class Twitter {
      * @returns {object} - object of patterns which contain regx for pasteConfig
      */
     static get pasteConfig() {
+        console.log('paste config', Embed.patterns);
         return {
             patterns: Embed.patterns,
         };
