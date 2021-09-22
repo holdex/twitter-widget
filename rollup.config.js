@@ -5,6 +5,7 @@ import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import json from '@rollup/plugin-json';
+import postcss from 'rollup-plugin-postcss';
 
 import pkg from './package.json';
 
@@ -81,6 +82,9 @@ export default {
 				generate: "ssr",
 				preserveWhitespace: true,
 			},
+		}),
+		postcss({
+			plugins: []
 		}),
 		// we'll extract any component CSS out into
 		// a separate file - better for performance
