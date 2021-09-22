@@ -92,10 +92,10 @@
         transition: color .3s ease-in-out
 
         &:visited
-            color: map-get($light, tweet-link-color)
+            color: map-get($light, tweet-color-gray)!important
 
         &:hover
-            color: map-get($light, tweet-color-red)
+            color: map-get($light, tweet-color-red)!important
 
             .icon-heart
                 opacity: 0
@@ -107,10 +107,10 @@
             color: map-get($dark, tweet-color-gray)
 
             &:visited
-                color: map-get($dark, tweet-link-color)
+                color: map-get($dark, tweet-color-gray)!important
 
             &:hover
-                color: map-get($dark, tweet-color-red)
+                color: map-get($dark, tweet-color-red)!important
 
     .likes
         margin-left: 0.25rem

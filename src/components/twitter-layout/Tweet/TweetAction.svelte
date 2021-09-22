@@ -92,7 +92,7 @@
         transition: color 0.3s ease-in-out
 
         &:hover
-            color: map-get($light, tweet-link-color-hover)
+            color: map-get($light, tweet-link-color-hover)!important
 
             .icon-reply
                 opacity: 0
@@ -105,7 +105,7 @@
             border-top: map-get($dark, tweet-border)
 
             &:hover
-                color: map-get($dark, tweet-link-color-hover)
+                color: map-get($dark, tweet-link-color-hover)!important
 
     
     .icon

@@ -12,7 +12,7 @@
 </script>
 
 <details>
-    <summary style="padding-bottom: {(width / height) * 100 || 0}%;">
+    <summary style="padding-bottom: {(height / width) * 100 || 0}%;">
         <div class="wrapper">
             <img {...rest} {alt} src={`${src}&name=small`} />
         </div>
