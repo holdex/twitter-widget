@@ -50,7 +50,4 @@
     .tweet :global(.icon)
         display: inline-block
         height: 1.25em
-        vertical-align: text-bottom
-        background-size: contain
-        background-repeat: no-repeat
 </style>
