@@ -101,7 +101,7 @@
                 opacity: 0
 
                 &.h
-                    opacity: 1
+                    opacity: 1!important
 
         &.dark
             color: map-get($dark, tweet-color-gray)
@@ -114,6 +114,7 @@
 
     .likes
         margin-left: 0.25rem
+        color: inherit
 
     .time
         color: map-get($light, tweet-color-gray)

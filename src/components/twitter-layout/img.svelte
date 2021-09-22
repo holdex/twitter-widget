@@ -3,21 +3,7 @@
 
     const { width, height, src, className, alt, ...rest } = $$props;
 
-    let styles = (node, props) => {
-        let applyStyles = (width, height) => {
-            node.style.paddingBottom = (height / width) * 100 + "%";
-        };
-
-        applyStyles(props.width, props.height);
-        return {
-            update(newProps) {
-                return applyStyles(newProps.width, newProps.height);
-            },
-        };
-    };
-
     let component;
-
     onMount(async () => {
         // @ts-ignore
         let module = await import("@github/details-dialog-element");
@@ -26,7 +12,7 @@
 </script>
 
 <details>
-    <summary use:styles={{ width, height }}>
+    <summary style="padding-bottom: {(width / height) * 100 || 0}%;">
         <div class="wrapper">
             <img {...rest} {alt} src={`${src}&name=small`} />
         </div>

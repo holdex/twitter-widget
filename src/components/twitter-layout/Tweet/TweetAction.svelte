@@ -98,7 +98,7 @@
                 opacity: 0
 
                 &.h
-                    opacity: 1
+                    opacity: 1!important
 
         &.dark
             color: map-get($dark, tweet-link-color)
