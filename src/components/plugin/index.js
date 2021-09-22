@@ -14,10 +14,11 @@ export default class Twitter {
             throw Error('Twitter Tool data should be object');
         }
 
-        const { service, source, caption = '' } = data;
+        const { service, embed, source, caption = '' } = data;
 
         this._data = {
             service: service || this.data.service,
+            embed: embed || this.data.embed,
             source: source || this.data.source,
             caption: caption || this.data.caption || '',
         };
@@ -72,7 +73,6 @@ export default class Twitter {
         }
         const container = document.createElement('div');
         const caption = document.createElement('div');
-        const template = document.createElement('template');
         const content = document.createElement('div');
         const preloader = this.createPreloader();
 
@@ -133,9 +133,15 @@ export default class Twitter {
      */
     onPaste(event) {
         const { key: service, data: url } = event.detail;
+
+        const { regex, embedUrl, id = (ids) => ids.shift() } = Twitter.services[service];
+        const result = regex.exec(url).slice(1);
+        const embed = embedUrl.replace(/<%= remote_id %>/g, id(result));
+
         this.data = {
             service,
             source: url,
+            embed,
         };
     }
 
@@ -148,11 +154,12 @@ export default class Twitter {
                 return typeof value === 'object';
             })
             .map(([key, service]) => {
-                const { regex, id } = service;
+                const { regex, id, embedUrl } = service;
 
                 return [key, {
                     regex,
                     id,
+                    embedUrl,
                 }];
             });
 
