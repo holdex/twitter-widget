@@ -90,9 +90,11 @@ export default class Twitter {
 
         const embedIsReady = this.embedIsReady(this.data.embed);
 
+        let Component = Twitter.component;
+        let app = new Component({ target: content });
         embedIsReady
-            .then((html) => {
-                content.innerHTML = html;
+            .then((ast) => {
+                app.$set({ ast });
                 container.appendChild(content);
                 container.appendChild(caption);
                 container.classList.remove(this.CSS.containerLoading);
@@ -146,7 +148,7 @@ export default class Twitter {
     }
 
     static prepare({ config = {} }) {
-        const { services = {}, fetch } = config;
+        const { services = {}, fetch, component } = config;
 
         const userServices = Object
             .entries(services)
@@ -183,6 +185,7 @@ export default class Twitter {
             }, {});
 
         Twitter.fetch = fetch;
+        Twitter.component = component;
     }
 
     /**
