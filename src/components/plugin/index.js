@@ -14,12 +14,13 @@ export default class Twitter {
             throw Error('Twitter Tool data should be object');
         }
 
-        const { service, embed, source, caption = '' } = data;
+        const { service, embed, source, theme, caption = '' } = data;
 
         this._data = {
             service: service || this.data.service,
             embed: embed || this.data.embed,
             source: source || this.data.source,
+            theme: theme || this.data.theme,
             caption: caption || this.data.caption || '',
         };
 
@@ -93,7 +94,7 @@ export default class Twitter {
         let Component = Twitter.component;
         embedIsReady
             .then((ast) => {
-                let app = new Component({ target: content, props: { ast } });
+                let app = new Component({ target: content, props: { ast, theme: this.data.theme } });
                 container.appendChild(content);
                 container.appendChild(caption);
                 container.classList.remove(this.CSS.containerLoading);
@@ -135,7 +136,7 @@ export default class Twitter {
     onPaste(event) {
         const { key: service, data: url } = event.detail;
 
-        const { regex, embedUrl, id = (ids) => ids.shift() } = Twitter.services[service];
+        const { regex, embedUrl, theme, id = (ids) => ids.shift() } = Twitter.services[service];
         const result = regex.exec(url).slice(1);
         const embed = embedUrl.replace(/<%= remote_id %>/g, id(result));
 
@@ -143,6 +144,7 @@ export default class Twitter {
             service,
             source: url,
             embed,
+            theme,
         };
     }
 
@@ -155,12 +157,13 @@ export default class Twitter {
                 return typeof value === 'object';
             })
             .map(([key, service]) => {
-                const { regex, id, embedUrl } = service;
+                const { regex, id, embedUrl, theme } = service;
 
                 return [key, {
                     regex,
                     id,
                     embedUrl,
+                    theme
                 }];
             });
 
