@@ -24,7 +24,7 @@
 <script>
     import { getContext } from "svelte";
 
-    const { href, title, className } = $$props;
+    const { href, title, className, children } = $$props;
 
     let theme = getContext("theme");
 </script>
@@ -36,7 +36,7 @@
     title={title || href}
     class="exclude {className} {theme}"
 >
-    {#if $$slots.default === href}
+    {#if children && children[0] === href}
         {beautifyHref(href)}
     {:else}
         <slot />

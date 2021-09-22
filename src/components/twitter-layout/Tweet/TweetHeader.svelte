@@ -67,8 +67,6 @@
             border: map-get($dark, tweet-avatar-border)
 
     .author
-        display: flex
-        flex-direction: column
         text-decoration: none
         color: inherit
         transition: color 0.3s ease-in-out
@@ -81,6 +79,7 @@
 
     .name,
     .username
+        display: table
         line-height: 1.2
         text-overflow: ellipsis
         white-space: nowrap

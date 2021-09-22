@@ -45,7 +45,8 @@ export default {
 				'remark-parse': 'markdown',
 				'unist-util-is/convert': 'convert$1',
 				'unified': 'unified',
-			}
+			},
+			inlineDynamicImports: true,
 		},
 		{
 			file: pkg.main,
@@ -59,7 +60,8 @@ export default {
 				'remark-parse': 'markdown',
 				'unist-util-is/convert': 'convert$1',
 				'unified': 'unified',
-			}
+			},
+			inlineDynamicImports: true,
 		},
 	],
 	context: 'this',

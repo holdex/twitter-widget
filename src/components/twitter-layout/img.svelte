@@ -1,31 +1,77 @@
 <script>
+    import { onMount } from "svelte";
+
     const { width, height, src, className, alt, ...rest } = $$props;
+
+    let styles = (node, props) => {
+        let applyStyles = (width, height) => {
+            node.style.paddingBottom = (height / width) * 100 + "%";
+        };
+
+        applyStyles(props.width, props.height);
+        return {
+            update(newProps) {
+                return applyStyles(newProps.width, newProps.height);
+            },
+        };
+    };
+
+    let component;
+
+    onMount(async () => {
+        // @ts-ignore
+        let module = await import("@github/details-dialog-element");
+        component = module.default;
+    });
 </script>
 
-<details style="--height={height}; --width={width};">
-    <summary>
-        <img {...rest} {alt} src={`${src}&name=small`} />
+<details>
+    <summary use:styles={{ width, height }}>
+        <div class="wrapper">
+            <img {...rest} {alt} src={`${src}&name=small`} />
+        </div>
     </summary>
 
     <details-dialog>
         <div class="bg" data-close-dialog />
         <img {...rest} {alt} src={`${src}&name=large`} {width} {height} />
     </details-dialog>
+    <svelte:component this={component} />
 </details>
 
 <style>
-    summary {
-        position: relative;
-        box-sizing: border-box;
-        padding-bottom: var(--height) / var(--width) * 100%;
-    }
-
     details {
         height: 100%;
         overflow: hidden;
     }
+
+    .wrapper {
+        position: absolute;
+        display: block;
+        overflow: hidden;
+        inset: 0px;
+        margin: 0;
+    }
+
+    .wrapper img {
+        position: absolute;
+        inset: 0px;
+        box-sizing: border-box;
+        padding: 0px;
+        border: none;
+        margin: auto;
+        display: block;
+        width: 0px;
+        height: 0px;
+        min-width: 100%;
+        max-width: 100%;
+        min-height: 100%;
+        max-height: 100%;
+        object-fit: cover;
+    }
     summary {
         position: relative;
+        box-sizing: border-box;
         height: 100%;
         list-style: none;
     }
@@ -34,6 +80,7 @@
     }
     summary :global(img) {
         cursor: pointer;
+        object-fit: cover;
     }
     :global(details-dialog) {
         position: fixed;

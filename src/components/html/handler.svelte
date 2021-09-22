@@ -61,8 +61,7 @@
     {:else}
         <svelte:component
             this={components.div}
-            clasName={getContainerClassName(type)}
-            {...props}
+            className={getContainerClassName(type)}
         >
             {#if node && node.nodes && Array.isArray(node.nodes)}
                 {#each node.nodes as child}
@@ -101,7 +100,7 @@
     {:else if type === "quote-tweet"}
         <svelte:self {...props} {components} />
     {:else}
-        <svelte:component this={components.a} {...props}>
+        <svelte:component this={components.a} {...props} children={node.nodes}>
             {#if node && node.nodes && Array.isArray(node.nodes)}
                 {#each node.nodes as child}
                     <svelte:self node={child} {components} />
@@ -131,7 +130,7 @@
     <svelte:component
         this={components[node.tag]}
         {...props}
-        class={props.className}
+        className={props.className}
     >
         {#if node && node.nodes && Array.isArray(node.nodes)}
             {#each node.nodes as child}
