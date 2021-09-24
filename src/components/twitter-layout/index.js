@@ -8,7 +8,7 @@ import { Ul, Ol, Li } from './lists';
 import Img from './img.svelte';
 import { Mention, Hashtag, Cashtag, Emoji, Poll } from './Twitter';
 import Tweet from './Tweet/index.svelte';
-import TweetSkeleton from './skeleton/index.svelte';
+import TweetSkeleton from './Tweet/TweetSkeleton.svelte';
 
 export default {
     div: Div,
