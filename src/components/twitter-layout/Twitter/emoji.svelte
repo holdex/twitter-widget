@@ -1,5 +1,9 @@
+<script>
+    const { alt, src } = $$props;
+</script>
+
 <span class="emoji">
-    <img alt={$$props.alt} width={18} height={18} {...$$props} />
+    <img {alt} {src} width={18} height={18} />
 </span>
 
 <style>

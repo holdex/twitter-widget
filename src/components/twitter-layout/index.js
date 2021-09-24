@@ -4,7 +4,7 @@ import A from './anchor.svelte';
 import { P, Blockquote, Hr } from './text';
 import { Code, Pre } from './code';
 import { Ul, Ol, Li } from './lists';
-// import { Table, Th, Td } from './table';
+import { Table, Th, Td } from './table';
 import Img from './img.svelte';
 import { Mention, Hashtag, Cashtag, Emoji, Poll } from './Twitter';
 import Tweet from './Tweet/index.svelte';
@@ -33,9 +33,9 @@ export default {
     ol: Ol,
     li: Li,
 
-    // table: Table,
-    // th: Th,
-    // td: Td,
+    table: Table,
+    th: Th,
+    td: Td,
 
     img: Img,
 
