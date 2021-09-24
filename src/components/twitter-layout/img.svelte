@@ -3,11 +3,9 @@
 
     const { width, height, src, className, alt, ...rest } = $$props;
 
-    let component;
     onMount(async () => {
         // @ts-ignore
-        let module = await import("@github/details-dialog-element");
-        component = module.default;
+        await import("@github/details-dialog-element");
     });
 </script>
 
@@ -22,7 +20,6 @@
         <div class="bg" data-close-dialog />
         <img {...rest} {alt} src={`${src}&name=large`} {width} {height} />
     </details-dialog>
-    <svelte:component this={component} />
 </details>
 
 <style>
