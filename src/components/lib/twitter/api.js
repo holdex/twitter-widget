@@ -8,21 +8,6 @@ function twitterLabsEnabled(expansions) {
     return String("attachments.poll_ids").includes(expansions);
 }
 
-export async function fetchTweetsHtml(ids) {
-    const res = await fetch(`${SYNDICATION_URL}/tweets.json?ids=${ids}`);
-
-    // if (res.data) return res.data;
-    if (res.status === 200) return res.data;
-    if (res.status === 404) return {};
-
-    throw new Error(`Fetch for the embedded tweets of "${ids}" failed with code: ${res.status}`);
-}
-
-export async function fetchTweetHtml(id) {
-    const html = await fetchTweetsHtml(id);
-    return html[id];
-}
-
 export async function fetchUserStatus(tweetId) {
     // If there isn't an API token don't do anything, this is only required for videos.
     if (!process.env.TWITTER_API_TOKEN) return;

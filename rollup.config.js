@@ -4,6 +4,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import json from '@rollup/plugin-json';
+import nodePolyfills from 'rollup-plugin-node-polyfills';
 
 import pkg from './package.json';
 
@@ -45,6 +46,7 @@ export default {
 	context: 'this',
 	external: ['XMLHttpRequest', 'axios', 'unified', 'remark-parse', 'date-fns/format', 'date-fns/formatDistanceStrict', 'unist-util-is/convert'],
 	plugins: [
+		nodePolyfills(),
 		svelte({
 			preprocess: sveltePreprocess({
 				sourceMap: !production,

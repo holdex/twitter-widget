@@ -1,8 +1,7 @@
 import GithubSlugger from 'github-slugger';
-import { fetchTweetHtml } from './twitter/api';
-import htmlToAst from './markdown/htmlToAst';
 import { getTweetData } from './twitter/tweetHtmlEmbed';
 import getTweetHtml from './twitter/parseHtml';
+import htmlToAst from './markdown/htmlToAst';
 
 class Context {
     constructor() {
@@ -17,14 +16,13 @@ class Context {
     }
 }
 
-export default async function fetchAst(tweetId) {
-    const tweetHtml = await fetchTweetHtml(tweetId);
-    const tweet = tweetHtml && getTweetData(tweetHtml);
-
-    if (!tweet) return;
+export default async function parseTweetHtml(tweetHTML, fetcher) {
+    const tweet = tweetHTML && getTweetData(tweetHTML);
+    if (!tweet) return undefined;
 
     const context = new Context();
-    const html = await getTweetHtml(tweet, context, fetchAst);
+    const html = await getTweetHtml(tweet, context, fetcher);
     const ast = await htmlToAst(html, context);
+
     return ast;
 }
