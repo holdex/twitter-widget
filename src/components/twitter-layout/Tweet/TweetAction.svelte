@@ -1,16 +1,21 @@
 <script>
     import { getContext } from "svelte";
-
     import { formatNumber } from "../../lib/utils";
 
     export let tweet;
-
-    const userUrl = `https://twitter.com/${tweet.username}`;
-    const tweetUrl = `${userUrl}/status/${tweet.id}`;
-    const count = tweet.replies + tweet.retweets;
-    const isConversation = tweet.ctaType === "conversation" || count > 4;
-
     const theme = getContext("theme");
+
+    $: ({ data, includes } = tweet);
+
+    $: authorInfo = includes.users.find((u) => u.id === data.author_id);
+
+    $: userUrl = `https://twitter.com/${authorInfo.username}`;
+    $: tweetUrl = `${userUrl}/status/${data.id}`;
+
+    $: metrics = data.public_metrics;
+
+    $: count = metrics.retweet_count + metrics.reply_count;
+    $: isConversation = count > 4;
 
     let chevronSrc =
         "https://storage.googleapis.com/stage-holdex-public/assets/chevron.png";
@@ -35,8 +40,7 @@
             src={replySrc}
         />
         <span class="text">
-            {count ? formatNumber(count) : tweet.ctaCount} people are talking about
-            this
+            {formatNumber(count)} people are talking about this
         </span>
         <img
             loading="lazy"
@@ -49,7 +53,7 @@
     <a
         class="exclude {$theme}"
         href={userUrl}
-        title={`View ${tweet.name}'s profile on Twitter`}
+        title={`View ${authorInfo.name}'s profile on Twitter`}
         target="_blank"
         rel="noopener noreferrer"
     >
@@ -59,7 +63,7 @@
             alt="user"
             src={profileSrc}
         />
-        <span class="text">See {tweet.name}'s other Tweets</span>
+        <span class="text">See {authorInfo.name}'s other Tweets</span>
         <img
             loading="lazy"
             class="icon icon-chevron"

@@ -14,14 +14,14 @@
     }
 
     function handleProps(n) {
-        const props = { ...n.props };
+        const props = { ...n };
 
-        // Always send className as a string
-        if (props.className && Array.isArray(props.className)) {
-            props.className = props.className.join(" ");
-        }
         if (n.data) {
             props.data = n.data;
+        }
+
+        if (n.includes) {
+            props.includes = n.includes;
         }
 
         return props;
@@ -35,11 +35,24 @@
     export let components;
 
     let props = handleProps(node);
-    const { data } = props;
-    const type = props.dataType || (data && data.type);
+    const { data, includes } = props;
 </script>
 
-{#if typeof node === "string"}
+<svelte:component this={components.Tweet} data={props}>
+    <svelte:component this={components.p}>
+        {@html data.text}
+    </svelte:component>
+    {#if includes && Array.isArray(includes.tweets)}
+        {#each includes.tweets as child}
+            <svelte:self
+                node={{ data: child, includes: { users: includes.users } }}
+                {components}
+            />
+        {/each}
+    {/if}
+</svelte:component>
+
+<!-- {#if typeof node === "string"}
     {@html node}
 {:else if node.tag === "div"}
     {#if type === "tweet"}
@@ -148,4 +161,4 @@
             {/each}
         {/if}
     </CustomElement>
-{/if}
+{/if} -->

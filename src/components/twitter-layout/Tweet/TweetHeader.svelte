@@ -3,12 +3,14 @@
 
     export let tweet;
 
-    const url = `https://twitter.com/${tweet.username}`;
-    const avatar = tweet.avatar.normal;
-
     const theme = getContext("theme");
 
-    let twitterSrc =
+    $: ({ data, includes } = tweet);
+
+    $: authorInfo = includes.users.find((u) => u.id === data.author_id);
+    $: url = `https://twitter.com/${authorInfo.username}`;
+
+    const twitterSrc =
         "https://storage.googleapis.com/stage-holdex-public/assets/twitter.png";
 </script>
 
@@ -19,7 +21,12 @@
         target="_blank"
         rel="noopener noreferrer"
     >
-        <img src={avatar} alt={tweet.name} width={36} height={36} />
+        <img
+            src={authorInfo.profile_image_url}
+            alt={authorInfo.name}
+            width={36}
+            height={36}
+        />
     </a>
     <a
         href={url}
@@ -27,11 +34,11 @@
         target="_blank"
         rel="noopener noreferrer"
     >
-        <span class="name" title={tweet.name}>
-            {tweet.name}
+        <span class="name" title={authorInfo.name}>
+            {authorInfo.name}
         </span>
-        <span class="username {$theme}" title={`@${tweet.username}`}>
-            @{tweet.username}
+        <span class="username {$theme}" title={`@${authorInfo.username}`}>
+            @{authorInfo.username}
         </span>
     </a>
     <a

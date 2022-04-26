@@ -18,10 +18,10 @@
 </script>
 
 <div class="tweet" class:tweet--dark={$themeStyle === "dark"}>
-    {#if skeleton || (ast && ast.length === 0)}
+    {#if skeleton}
         <TweetSkeleton />
     {:else}
-        <Node {components} node={ast[0]} />
+        <Node {components} node={ast} />
     {/if}
 </div>
 

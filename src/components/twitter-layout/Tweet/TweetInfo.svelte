@@ -4,11 +4,15 @@
     import { formatNumber } from "../../lib/utils";
 
     export let tweet;
-
-    const likeUrl = `https://twitter.com/intent/like?tweet_id=${tweet.id}`;
-    const tweetUrl = `https://twitter.com/${tweet.username}/status/${tweet.id}`;
-    const createdAt = new Date(tweet.createdAt);
     const theme = getContext("theme");
+
+    $: ({ data, includes } = tweet);
+
+    $: authorInfo = includes.users.find((u) => u.id === data.author_id);
+    $: likeUrl = `https://twitter.com/intent/like?tweet_id=${data.id}`;
+    $: tweetUrl = `https://twitter.com/${authorInfo.username}/status/${data.id}`;
+    $: createdAt = new Date(data.created_at);
+    $: metrics = data.public_metrics;
 
     let heartSrc =
         "https://storage.googleapis.com/stage-holdex-public/assets/heart.png?v=1";
@@ -16,7 +20,7 @@
 
 <div class="info">
     <a
-        class="like exclude {theme}"
+        class="like exclude {$theme}"
         href={likeUrl}
         title="Like"
         target="_blank"
@@ -25,15 +29,13 @@
         <span class="heart">
             <img class="icon icon-heart" alt="heart" src={heartSrc} />
         </span>
-        {#if tweet.heartCount || tweet.likes > 0}
-            <span class="likes"
-                >{tweet.heartCount || formatNumber(tweet.likes)}</span
-            >
+        {#if metrics.like_count > 0}
+            <span class="likes">{formatNumber(metrics.like_count)}</span>
         {/if}
     </a>
     {#if createdAt}
         <a
-            class="time exclude {theme}"
+            class="time exclude {$theme}"
             href={tweetUrl}
             target="_blank"
             rel="noopener noreferrer"
