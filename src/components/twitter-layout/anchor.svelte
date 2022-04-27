@@ -44,6 +44,7 @@
 
     a
         color: map-get($light, link-color)
+        display: inline-block
         text-decoration: none
         
         &:hover

@@ -21,13 +21,16 @@
     {:else if nodeItem.type === "link"}
         <svelte:component this={components.a} {...nodeItem} />
     {:else if nodeItem.type === "link-preview"}
-        <svelte:component this={components.linkPreview} {...nodeItem} />
+        {#if nodeItem.active}
+            <svelte:component this={components.linkPreview} {...nodeItem} />
+        {:else}
+            <svelte:component this={components.a} {...nodeItem} />
+        {/if}
     {:else if nodeItem.type === "image"}
         <svelte:component this={components.img} {...nodeItem} />
     {:else if components[nodeItem.type]}
         <svelte:component this={components[nodeItem.type]} {...nodeItem} />
     {:else}
-        missing component for: {nodeItem.type}
-        <!-- <CustomElement tag={nodeItem.type} {...nodeItem} /> -->
+        <CustomElement tag={nodeItem.type} {...nodeItem} />
     {/if}
 {/each}

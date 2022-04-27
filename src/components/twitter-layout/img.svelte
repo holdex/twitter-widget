@@ -24,7 +24,7 @@
 
 <style>
     details {
-        height: 100%;
+        width: 100%;
         margin-top: 12px;
         overflow: hidden;
     }
@@ -58,7 +58,7 @@
     summary {
         position: relative;
         box-sizing: border-box;
-        height: 100%;
+        width: 100%;
         list-style: none;
     }
     summary::-webkit-details-marker {

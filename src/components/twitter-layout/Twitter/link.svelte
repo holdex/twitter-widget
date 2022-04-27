@@ -19,6 +19,7 @@
     @import "../../common"
 
     a
+        display: inline-block
         color: map-get($light, link-color)
         text-decoration: none
         

@@ -21,4 +21,9 @@
     .video-container > :global(video)
         width: 100%
         max-height: 500px
+
+    .content-container
+        margin: $text-margin
+        white-space: pre-wrap
+        word-wrap: break-word
 </style>

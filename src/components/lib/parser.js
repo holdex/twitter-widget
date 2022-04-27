@@ -89,6 +89,7 @@ let parseUrls = (text, elements, entries, media) => {
                 type: "link-preview",
                 href: value,
                 title: entry.title,
+                active: false,
                 description: entry.description,
                 images: entry.images,
                 value: expanded_url
@@ -109,6 +110,14 @@ let parseUrls = (text, elements, entries, media) => {
             });
         }
     });
+
+    if (elements && Object.values(elements).filter(element => element.type === "image").length === 0) {
+        let preview = Object.values(elements).find(entry => entry.type === "link-preview");
+
+        if (preview) {
+            preview.active = true;
+        }
+    }
 
     return [text, elements];
 }

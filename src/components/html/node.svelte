@@ -8,7 +8,7 @@
 </script>
 
 <svelte:component this={components.Tweet} data={node}>
-    <svelte:component this={components.p}>
+    <svelte:component this={components.div} className="content-container">
         <Handler node={parsedText} {components} />
     </svelte:component>
     {#if replies && Array.isArray(replies)}
