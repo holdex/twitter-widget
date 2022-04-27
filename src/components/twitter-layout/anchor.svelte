@@ -1,7 +1,7 @@
 <script context="module">
     const PROTOCOL = /^(https?:|)\/\//;
 
-    const beautifyHref = (href) => {
+    export const beautifyHref = (href) => {
         const text = href.replace(PROTOCOL, "");
         const i = text.indexOf("/");
 
@@ -24,7 +24,7 @@
 <script>
     import { getContext } from "svelte";
 
-    const { href, title, className, children } = $$props;
+    const { href, title, value } = $$props;
 
     let theme = getContext("theme");
 </script>
@@ -34,13 +34,9 @@
     target="_blank"
     rel="noopener noreferrer"
     title={title || href}
-    class="exclude {className} {$theme}"
+    class="exclude {$theme}"
 >
-    {#if children && children[0] === href}
-        {beautifyHref(href)}
-    {:else}
-        <slot />
-    {/if}
+    {beautifyHref(value)}
 </a>
 
 <style lang="sass">

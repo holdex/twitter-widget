@@ -7,6 +7,12 @@ $li-margin: 0 0 0.5rem 0;
 $tweet-font: normal normal 16px/1.4 Helvetica, Roboto, "Segoe UI", Calibri,
     sans-serif;
 
+@mixin truncate() {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 $light: (
     colors-blue: #0c00ff,
     colors-purple: #be00ff,
@@ -41,8 +47,8 @@ $dark: (
     accents-4: #666666,
     accents-5: #888888,
     bg-color: #000,
-    link-color: #3291ff,
-    poll-bar-color: #3291ff,
+    link-color: #1d9bf0,
+    poll-bar-color: #1d9bf0,
     inline-code-color: #be00ff,
     code-color: #9efeff,
     code-bg-color: #1e1e3f,

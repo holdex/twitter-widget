@@ -5,16 +5,14 @@
     export let tweet;
     const theme = getContext("theme");
 
-    $: ({ data, includes } = tweet);
+    $: ({ author_id, users, public_metrics, id } = tweet);
 
-    $: authorInfo = includes.users.find((u) => u.id === data.author_id);
+    $: authorInfo = users.find((u) => u.id === author_id);
 
     $: userUrl = `https://twitter.com/${authorInfo.username}`;
-    $: tweetUrl = `${userUrl}/status/${data.id}`;
+    $: tweetUrl = `${userUrl}/status/${id}`;
 
-    $: metrics = data.public_metrics;
-
-    $: count = metrics.retweet_count + metrics.reply_count;
+    $: count = public_metrics.retweet_count + public_metrics.reply_count;
     $: isConversation = count > 4;
 
     let chevronSrc =

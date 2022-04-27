@@ -1,5 +1,5 @@
 import Tweet from './Tweet.svelte';
 import TwitterPlugin from './components/plugin';
-import parseTweetHtml from './components/lib/fetchAst';
+import parseTweet from './components/lib/fetcher';
 
-export { Tweet, parseTweetHtml, TwitterPlugin };
+export { Tweet, parseTweet, TwitterPlugin };

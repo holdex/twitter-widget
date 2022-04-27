@@ -1,8 +1,6 @@
 <script>
     import Link from "./link.svelte";
-    const { href, children } = $$props;
+    const { href, value } = $$props;
 </script>
 
-<Link {href} type="#">
-    {children[0].replace(/^\#/, "")}
-</Link>
+<Link {href} type="#">{value}</Link>

@@ -1,112 +1,182 @@
 
+import twttr from "twitter-text";
 
-export default function parser(text, data) {
-    let urls = [], mentions = [], hashtags = [], cashtags = [];
+export default function parser(text, data, media) {
+    let elements = {};
     let newText = text;
 
-    [newText, urls] = parseUrls(newText, data.entities.urls);
-    [newText, mentions] = parseMentions(newText, data.entities.mentions);
-    [newText, hashtags] = parseHashtags(newText, data.entities.hashtags);
-    [newText, cashtags] = parseCashtags(newText, data.entities.cashtags);
+    if (data.entities.urls) {
+        [newText, elements] = parseUrls(newText, elements, data.entities.urls, media);
+    }
 
-    newText.match(/~/g);
+    if (data.entities.mentions) {
+        [newText, elements] = parseMentions(newText, elements);
+    }
+
+    if (data.entities.hashtags) {
+        [newText, elements] = parseHashtags(newText, elements);
+    }
+
+    if (data.entities.cashtags) {
+        [newText, elements] = parseCashtags(newText, elements);
+    }
+
+    let parsed = [];
+    let index = 0;
+
+    newText.split(/(~+)/gu).forEach(token => {
+        if (/(~+)/gu.test(token)) {
+            parsed.push(elements[`p${index}`]);
+            index += token.length;
+        } else {
+            parsed.push({
+                type: "text",
+                value: token
+            });
+            index += token.length;
+        }
+    });
+    return parsed;
 }
 
-let parseUrls = (text, entries) => {
-    let elements = [];
+let parseUrls = (text, elements, entries, media) => {
 
-    entries.forEach(entry => {
-        let start = entry.start;
-        let end = entry.end;
+    let urls = twttr.extractUrlsWithIndices(text);
 
-        let url = entry.url;
+    let mediaIndex = 0;
+    urls.forEach(url => {
+        let start = url.indices[0];
+        let end = url.indices[1];
+        let value = url.url;
+
+        let entry = entries.find(entry => entry.url === value);
+
         let expanded_url = entry.expanded_url;
         let display_url = entry.display_url;
 
-        if (/^https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(es)?\/(\d+).*$/.test(expanded_url)) {
-            text = replaceRange(text, start, end, getTilds(url.length));
-            continue;
+        if (/^https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(es)?\/(\d+)$/.test(expanded_url)) {
+            let element = {
+                type: "space"
+            };
+            text = replaceRange(text, start, end, getTilds(value.length));
+            elements = Object.assign(elements, {
+                [`p${start}`]: element
+            });
+        } else if (/^https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(es)?\/(\d+)\/photo\/.*$/.test(expanded_url)) {
+            let element = {
+                ...media[mediaIndex],
+                type: "image",
+                src: media[mediaIndex].url,
+            };
+            mediaIndex += 1;
+            text = replaceRange(text, start, end, getTilds(value.length));
+            elements = Object.assign(elements, {
+                [`p${start}`]: element
+            });
+        } else if (/^https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(es)?\/(\d+)\/video\/.*$/.test(expanded_url)) {
+            let element = {
+                ...media[mediaIndex],
+                type: "video",
+                src: media[mediaIndex].url,
+            };
+            mediaIndex += 1;
+            text = replaceRange(text, start, end, getTilds(value.length));
+            elements = Object.assign(elements, {
+                [`p${start}`]: element
+            });
+        } else if (entry.title) {
+            let element = {
+                type: "link-preview",
+                href: value,
+                title: entry.title,
+                description: entry.description,
+                images: entry.images,
+                value: expanded_url
+            };
+            text = replaceRange(text, start, end, getTilds(value.length));
+            elements = Object.assign(elements, {
+                [`p${start}`]: element
+            });
+        } else {
+            let element = {
+                type: "link",
+                href: value,
+                value: expanded_url
+            };
+            text = replaceRange(text, start, end, getTilds(value.length));
+            elements = Object.assign(elements, {
+                [`p${start}`]: element
+            });
         }
-
-        let element = {
-            type: "link",
-            href: expanded_url,
-            value: url
-        };
-        text = replaceRange(text, start, end, getTilds(url.length));
-        elements.push(element);
     });
 
     return [text, elements];
 }
 
-let parseMentions = (text, entries) => {
-    let elements = [];
+let parseMentions = (text, elements) => {
+    let mentions = twttr.extractMentionsOrListsWithIndices(text);
 
-    entries.forEach(entry => {
-        let start = entry.start;
-        let end = entry.end;
-        let username = entry.username;
-
-        let href = `https://twitter.com/${username}`;
-        let value = `@${username}`;
+    mentions.forEach(mention => {
+        let start = mention.indices[0];
+        let end = mention.indices[1];
+        let value = mention.screenName;
 
         let element = {
             type: "mention",
-            href: href,
-            value: value
+            href: `https://twitter.com/${value}`,
+            value: `@${value}`
         };
 
-        text = replaceRange(text, start, end, getTilds(value.length));
-        elements.push(element);
+        text = replaceRange(text, start, end, getTilds(value.length + 1));
+        elements = Object.assign(elements, {
+            [`p${start}`]: element
+        });
     });
 
     return [text, elements];
 }
 
-let parseHashtags = (text, entries) => {
-    let elements = [];
+let parseHashtags = (text, elements) => {
+    let hashtags = twttr.extractHashtagsWithIndices(text);
 
-    entries.forEach(entry => {
-        let start = entry.start;
-        let end = entry.end;
-        let tag = entry.tag;
-
-        let href = `https://twitter.com/hashtag/${tag}?src=hashtag_click`;
-        let value = `#${tag}`;
+    hashtags.forEach(hashtag => {
+        let start = hashtag.indices[0];
+        let end = hashtag.indices[1];
+        let value = hashtag.hashtag;
 
         let element = {
             type: "hashtag",
-            href: href,
-            value: value
+            href: `https://twitter.com/hashtag/${value}?src=hashtag_click`,
+            value: `#${value}`
         };
 
-        text = replaceRange(text, start, end, getTilds(value.length));
-        elements.push(element);
+        text = replaceRange(text, start, end, getTilds(value.length + 1));
+        elements = Object.assign(elements, {
+            [`p${start}`]: element
+        });
     });
 
     return [text, elements];
 }
 
-let parseCashtags = (text, entries) => {
-    let elements = [];
+let parseCashtags = (text, elements) => {
+    let cashtags = twttr.extractCashtagsWithIndices(text);
 
-    entries.forEach(entry => {
-        let start = entry.start;
-        let end = entry.end;
-        let tag = entry.tag;
-
-        let href = `https://twitter.com/search?q=%24${tag}&src=cashtag_click`;
-        let value = `$${tag}`;
+    cashtags.forEach(cashtag => {
+        let start = cashtag.indices[0];
+        let end = cashtag.indices[1];
+        let value = cashtag.cashtag;
 
         let element = {
             type: "cashtag",
-            href: href,
-            value: value
+            href: `https://twitter.com/search?q=%24${value}&src=cashtag_click`,
+            value: `$${value}`
         };
 
-        text = replaceRange(text, start, end, getTilds(value.length));
-        elements.push(element);
+        text = replaceRange(text, start, end, getTilds(value.length + 1));
+        elements = Object.assign(elements, {
+            [`p${start}`]: element
+        });
     });
 
     return [text, elements];
@@ -116,7 +186,7 @@ function replaceRange(s, start, end, substitute) {
     return s.substring(0, start) + substitute + s.substring(end);
 }
 
-function getTilds = (length) => {
+function getTilds(length) {
     let tilds = [];
     for (let i = 0; i < length; i++) {
         tilds.push("~");

@@ -6,13 +6,12 @@
     export let tweet;
     const theme = getContext("theme");
 
-    $: ({ data, includes } = tweet);
+    $: ({ author_id, id, users, created_at, public_metrics } = tweet);
 
-    $: authorInfo = includes.users.find((u) => u.id === data.author_id);
-    $: likeUrl = `https://twitter.com/intent/like?tweet_id=${data.id}`;
-    $: tweetUrl = `https://twitter.com/${authorInfo.username}/status/${data.id}`;
-    $: createdAt = new Date(data.created_at);
-    $: metrics = data.public_metrics;
+    $: authorInfo = users.find((u) => u.id === author_id);
+    $: likeUrl = `https://twitter.com/intent/like?tweet_id=${id}`;
+    $: tweetUrl = `https://twitter.com/${authorInfo.username}/status/${id}`;
+    $: createdAt = new Date(created_at);
 
     let heartSrc =
         "https://storage.googleapis.com/stage-holdex-public/assets/heart.png?v=1";
@@ -29,8 +28,8 @@
         <span class="heart">
             <img class="icon icon-heart" alt="heart" src={heartSrc} />
         </span>
-        {#if metrics.like_count > 0}
-            <span class="likes">{formatNumber(metrics.like_count)}</span>
+        {#if public_metrics.like_count > 0}
+            <span class="likes">{formatNumber(public_metrics.like_count)}</span>
         {/if}
     </a>
     {#if createdAt}

@@ -1,0 +1,33 @@
+<script>
+    import { beautifyHref } from "../anchor.svelte";
+
+    export let title;
+    export let description;
+    export let images;
+    export let href;
+    export let value;
+
+    $: image = images && images[0];
+</script>
+
+<a
+    class="exclude embed-link underline-not"
+    {href}
+    target="_blank"
+    rel="nofollow"
+>
+    {#if image}
+        <span class="embed-link__image">
+            <img src={image.url} alt="Website" />
+        </span>
+    {/if}
+    <span class="embed-link__content">
+        <span class="embed-link__name">{beautifyHref(value)}</span>
+        <span class="embed-link__title">{title}</span>
+        <span class="embed-link__description">{description}</span>
+    </span>
+</a>
+
+<style lang="sass" src="./style.sass">
+
+</style>

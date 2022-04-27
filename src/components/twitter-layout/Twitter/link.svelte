@@ -1,27 +1,30 @@
 <script>
-    const { href, title, type } = $$props;
+    import { getContext } from "svelte";
+    const { href } = $$props;
+
+    let theme = getContext("theme");
 </script>
 
 <a
-    class="exclude"
+    class="exclude {$theme}"
     {href}
     target="_blank"
     rel="noopener noreferrer"
-    title={title || href}
+    title={href}
 >
-    <s>{type}</s>
     <b><slot /></b>
 </a>
 
-<style>
-    a {
-        color: #22bad9;
-        text-decoration: none;
-    }
-    a:hover > b {
-        text-decoration: underline;
-    }
-    s {
-        text-decoration: none;
-    }
+<style lang="sass">
+    @import "../../common"
+
+    a
+        color: map-get($light, link-color)
+        text-decoration: none
+        
+        &:hover
+            text-decoration: underline
+
+    .dark
+        color: map-get($dark, link-color)
 </style>

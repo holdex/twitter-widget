@@ -1,7 +1,7 @@
 <script>
     import { onMount } from "svelte";
 
-    const { width, height, src, className, alt, ...rest } = $$props;
+    const { width, height, src, alt_text, ...rest } = $$props;
 
     onMount(async () => {
         // @ts-ignore
@@ -12,25 +12,27 @@
 <details>
     <summary style="padding-bottom: {(height / width) * 100 || 0}%;">
         <div class="wrapper">
-            <img {...rest} {alt} src={`${src}&name=small`} />
+            <img {...rest} alt={alt_text} src={`${src}`} />
         </div>
     </summary>
 
     <details-dialog>
         <div class="bg" data-close-dialog />
-        <img {...rest} {alt} src={`${src}&name=large`} {width} {height} />
+        <img {...rest} alt={alt_text} src={`${src}`} {width} {height} />
     </details-dialog>
 </details>
 
 <style>
     details {
         height: 100%;
+        margin-top: 12px;
         overflow: hidden;
     }
 
     .wrapper {
         position: absolute;
         display: block;
+        border-radius: 10px;
         overflow: hidden;
         inset: 0px;
         margin: 0;
@@ -45,6 +47,7 @@
         margin: auto;
         display: block;
         width: 0px;
+        border-radius: 10px;
         height: 0px;
         min-width: 100%;
         max-width: 100%;

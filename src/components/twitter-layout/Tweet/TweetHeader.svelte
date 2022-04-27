@@ -5,9 +5,9 @@
 
     const theme = getContext("theme");
 
-    $: ({ data, includes } = tweet);
+    $: ({ author_id, users } = tweet);
 
-    $: authorInfo = includes.users.find((u) => u.id === data.author_id);
+    $: authorInfo = users.find((u) => u.id === author_id);
     $: url = `https://twitter.com/${authorInfo.username}`;
 
     const twitterSrc =
