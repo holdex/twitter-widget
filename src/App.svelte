@@ -8,6 +8,7 @@
     export let ast;
     export let skeleton;
     export let theme = "light";
+    export let html = false;
 
     const TweetSkeleton = components.TweetSkeleton;
 
@@ -21,7 +22,7 @@
     {#if skeleton}
         <TweetSkeleton />
     {:else}
-        <Node {components} node={ast} />
+        <Node {components} node={ast} html={html} />
     {/if}
 </div>
 

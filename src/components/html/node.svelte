@@ -3,17 +3,21 @@
 
     export let node;
     export let components;
+    export let html;
 
     const { replies, parsedText } = node;
 </script>
 
 <svelte:component this={components.Tweet} data={node}>
-    <svelte:component this={components.div} className="content-container">
+    <svelte:component
+        this={html ? components.div : components.p}
+        className="content-container"
+    >
         <Handler node={parsedText} {components} />
     </svelte:component>
     {#if replies && Array.isArray(replies)}
         {#each replies as child}
-            <svelte:self node={child} {components} />
+            <svelte:self node={child} {components} {html} />
         {/each}
     {/if}
 </svelte:component>
