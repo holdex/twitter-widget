@@ -74,10 +74,14 @@ let parseUrls = (text, elements, entries, media) => {
                 [`p${start}`]: element
             });
         } else if (/^https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(es)?\/(\d+)\/video\/.*$/.test(expanded_url)) {
+            // let element = {
+            //     ...media[mediaIndex],
+            //     type: "video",
+            //     src: media[mediaIndex].url,p
+            // }; 
+            // TODO: add support for video when the API will be available
             let element = {
-                ...media[mediaIndex],
-                type: "video",
-                src: media[mediaIndex].url,
+                type: "space"
             };
             mediaIndex += 1;
             text = replaceRange(text, start, end, getTilds(value.length));
