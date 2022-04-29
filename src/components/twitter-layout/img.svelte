@@ -10,13 +10,8 @@
 </script>
 
 {#if html}
-    <div
-        class="details"
-        style="padding-bottom: {(height / width) * 100 || 0}%;"
-    >
-        <div class="wrapper">
-            <img {...rest} alt={alt_text} src={`${src}`} />
-        </div>
+    <div class="wrapper relative">
+        <img {...rest} alt={alt_text} src={`${src}`} />
     </div>
 {:else}
     <details>
@@ -62,13 +57,18 @@
         display: block;
         width: 0px;
         border-radius: 10px;
-        height: 0px;
-        min-width: 100%;
-        max-width: 100%;
-        min-height: 100%;
-        max-height: 100%;
+        width: 100%;
+        width: 100%;
         object-fit: cover;
     }
+    .wrapper.relative {
+        position: relative;
+        margin-top: 12px;
+    }
+    .wrapper.relative img {
+        position: relative;
+    }
+
     summary {
         position: relative;
         box-sizing: border-box;

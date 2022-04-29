@@ -1,6 +1,16 @@
 <script>
     import App from "./App.svelte";
+
+    const { html } = $$props;
 </script>
+
+{#if html}
+    <App {...$$props} />
+{:else}
+    <div>
+        <App {...$$props} />
+    </div>
+{/if}
 
 <style lang="sass" global>
     div *,
@@ -10,7 +20,3 @@
         padding: 0
         box-sizing: border-box
 </style>
-
-<div>
-    <App {...$$props} />
-</div>

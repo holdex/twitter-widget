@@ -23,7 +23,11 @@
         <svelte:component this={components.a} {...nodeItem} />
     {:else if nodeItem.type === "link-preview"}
         {#if nodeItem.active}
-            <svelte:component this={components.linkPreview} {...nodeItem} />
+            <svelte:component
+                this={components.linkPreview}
+                {...nodeItem}
+                {html}
+            />
         {:else}
             <svelte:component this={components.a} {...nodeItem} />
         {/if}

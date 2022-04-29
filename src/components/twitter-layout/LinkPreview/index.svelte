@@ -6,6 +6,7 @@
     export let images;
     export let href;
     export let value;
+    export let html;
 
     $: image = images && images[0];
 </script>
@@ -17,7 +18,7 @@
     rel="nofollow"
 >
     {#if image}
-        <span class="embed-link__image">
+        <span class="embed-link__image" class:relative={html}>
             <img src={image.url} alt="Website" />
         </span>
     {/if}
