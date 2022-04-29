@@ -1,4 +1,4 @@
-<div class={$$props.className}>
+<div dir="auto" class={$$props.className}>
     <slot />
 </div>
 

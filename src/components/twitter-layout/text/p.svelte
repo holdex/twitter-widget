@@ -1,4 +1,4 @@
-<p><slot /></p>
+<p dir="auto"><slot /></p>
 
 <style lang="sass">
     @import "../../common"
