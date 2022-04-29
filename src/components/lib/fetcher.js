@@ -15,7 +15,7 @@ export default async function parseTweet(tweetJSON, fetcher) {
     }
 
     let promises = [];
-    if (data.referenced_tweets) {
+    if (data && data.referenced_tweets) {
         data.referenced_tweets.forEach((tweet) => {
             promises.push(fetcher(tweet.id));
         });

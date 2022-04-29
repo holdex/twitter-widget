@@ -5,19 +5,19 @@ export default function parser(text, data, media) {
     let elements = {};
     let newText = text;
 
-    if (data.entities.urls) {
+    if (data.entities && data.entities.urls) {
         [newText, elements] = parseUrls(newText, elements, data.entities.urls, media);
     }
 
-    if (data.entities.mentions) {
+    if (data.entities && data.entities.mentions) {
         [newText, elements] = parseMentions(newText, elements);
     }
 
-    if (data.entities.hashtags) {
+    if (data.entities && data.entities.hashtags) {
         [newText, elements] = parseHashtags(newText, elements);
     }
 
-    if (data.entities.cashtags) {
+    if (data.entities && data.entities.cashtags) {
         [newText, elements] = parseCashtags(newText, elements);
     }
 
