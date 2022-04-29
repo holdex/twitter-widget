@@ -18,11 +18,15 @@
     setContext("theme", themeStyle);
 </script>
 
-<div class="tweet" class:tweet--dark={$themeStyle === "dark"}>
+<div
+    class="tweet"
+    class:left-aligned={html}
+    class:tweet--dark={$themeStyle === "dark"}
+>
     {#if skeleton}
         <TweetSkeleton />
     {:else}
-        <Node {components} node={ast} html={html} />
+        <Node {components} node={ast} {html} />
     {/if}
 </div>
 

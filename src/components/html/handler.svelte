@@ -3,6 +3,7 @@
 
     export let node;
     export let components;
+    export let html;
 </script>
 
 {#each node as nodeItem}
@@ -27,7 +28,7 @@
             <svelte:component this={components.a} {...nodeItem} />
         {/if}
     {:else if nodeItem.type === "image"}
-        <svelte:component this={components.img} {...nodeItem} />
+        <svelte:component this={components.img} {...nodeItem} {html} />
     {:else if components[nodeItem.type]}
         <svelte:component this={components[nodeItem.type]} {...nodeItem} />
     {:else}

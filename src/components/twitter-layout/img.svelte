@@ -1,7 +1,7 @@
 <script>
     import { onMount } from "svelte";
 
-    const { width, height, src, alt_text, ...rest } = $$props;
+    const { width, height, src, alt_text, html, ...rest } = $$props;
 
     onMount(async () => {
         // @ts-ignore
@@ -9,21 +9,35 @@
     });
 </script>
 
-<details>
-    <summary style="padding-bottom: {(height / width) * 100 || 0}%;">
+{#if html}
+    <div
+        class="details"
+        style="padding-bottom: {(height / width) * 100 || 0}%;"
+    >
         <div class="wrapper">
             <img {...rest} alt={alt_text} src={`${src}`} />
         </div>
-    </summary>
+    </div>
+{:else}
+    <details>
+        <summary style="padding-bottom: {(height / width) * 100 || 0}%;">
+            <div class="wrapper">
+                <img {...rest} alt={alt_text} src={`${src}`} />
+            </div>
+        </summary>
 
-    <details-dialog>
-        <div class="bg" data-close-dialog />
-        <img {...rest} alt={alt_text} src={`${src}`} {width} {height} />
-    </details-dialog>
-</details>
+        <details-dialog>
+            <div class="bg" data-close-dialog />
+            <img {...rest} alt={alt_text} src={`${src}`} {width} {height} />
+        </details-dialog>
+    </details>
+{/if}
 
 <style>
-    details {
+    details,
+    .details {
+        position: relative;
+        display: inline-block;
         width: 100%;
         margin-top: 12px;
         overflow: hidden;

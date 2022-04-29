@@ -13,7 +13,7 @@
         this={html ? components.div : components.p}
         className="content-container"
     >
-        <Handler node={parsedText} {components} />
+        <Handler node={parsedText} {components} {html} />
     </svelte:component>
     {#if replies && Array.isArray(replies)}
         {#each replies as child}
