@@ -88,7 +88,7 @@ let parseUrls = (text, elements, entries, media) => {
             elements = Object.assign(elements, {
                 [`p${start}`]: element
             });
-        } else if (entry.title) {
+        } else if (entry.title && entry.images) {
             let element = {
                 type: "link-preview",
                 href: value,
