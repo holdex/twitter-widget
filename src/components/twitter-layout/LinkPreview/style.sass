@@ -10,8 +10,12 @@
     z-index: 1
     margin-top: 12px
     transition: background-color .3s ease-in-out, border-color .3s ease-in-out
-    background-color: map-get($dark, tweet-bg-color)
-    border: map-get($dark, tweet-border)
+    background-color: map-get($light, tweet-bg-color)
+    border: map-get($light, tweet-border)
+
+    &.dark
+        background-color: map-get($dark, tweet-bg-color)
+        border: map-get($dark, tweet-border)
 
     &__image
         position: relative
@@ -20,8 +24,8 @@
         padding-bottom: percentage(9/16)
         vertical-align: top
         border-radius: 16px 16px 0 0
-        background-color: map-get($dark, tweet-bg-color)
-        border-bottom: map-get($dark, tweet-border)
+        background-color: map-get($light, tweet-bg-color)
+        border-bottom: map-get($light, tweet-border)
 
         img
             position: absolute
@@ -35,6 +39,10 @@
 
             img
                 position: relative
+
+    &.dark .embed-link__image
+        background-color: map-get($dark, tweet-bg-color)
+        border-bottom: map-get($dark, tweet-border)
 
     &__content
         position: relative
@@ -56,7 +64,7 @@
         position: relative
         display: block
         margin-bottom: 2px
-        color: map-get($light, tweet-bg-color)
+        color: map-get($dark, tweet-bg-color)
         @include truncate()
 
     &__description
@@ -64,3 +72,6 @@
         display: block
         -webkit-line-clamp: 2
         color: map-get($dark, accents-5)
+
+    &.dark .embed-link__title
+        color: map-get($light, tweet-bg-color)

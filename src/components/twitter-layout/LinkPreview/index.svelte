@@ -1,4 +1,5 @@
 <script>
+    import { getContext } from "svelte";
     import { beautifyHref } from "../anchor.svelte";
 
     export let title;
@@ -9,10 +10,12 @@
     export let html;
 
     $: image = images && images[0];
+
+    let theme = getContext("theme");
 </script>
 
 <a
-    class="exclude embed-link underline-not"
+    class="exclude embed-link underline-not {$theme}"
     {href}
     target="_blank"
     rel="nofollow"
