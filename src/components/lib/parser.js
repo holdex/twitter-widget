@@ -1,12 +1,13 @@
 
 import twttr from "twitter-text";
+import ogs from "open-graph-scraper";
 
-export default function parser(text, data, media) {
+export default async function parser(text, data, media) {
     let elements = {};
     let newText = text;
 
     if (data.entities && data.entities.urls) {
-        [newText, elements] = parseUrls(newText, elements, data.entities.urls, media);
+        [newText, elements] = await parseUrls(newText, elements, data.entities.urls, media);
     }
 
     if (data.entities && data.entities.mentions) {
@@ -39,12 +40,13 @@ export default function parser(text, data, media) {
     return parsed;
 }
 
-let parseUrls = (text, elements, entries, media) => {
+let parseUrls = async (text, elements, entries, media) => {
 
     let urls = twttr.extractUrlsWithIndices(text);
 
     let mediaIndex = 0;
-    urls.forEach(url => {
+
+    for (const url of urls) {
         let start = url.indices[0];
         let end = url.indices[1];
         let value = url.url;
@@ -89,13 +91,21 @@ let parseUrls = (text, elements, entries, media) => {
                 [`p${start}`]: element
             });
         } else if (entry.title && entry.images) {
+            let ogInfo = await ogs({ url: expanded_url, onlyGetOpenGraphInfo: true }).then(r => r.result);
+            let images = [];
+            if (ogInfo && ogInfo.ogImage) {
+                images = [ogInfo.ogImage];
+            } else {
+                images = entry.images;
+            }
+
             let element = {
                 type: "link-preview",
                 href: value,
                 title: entry.title,
                 active: false,
                 description: entry.description,
-                images: entry.images,
+                images: images,
                 value: expanded_url
             };
             text = replaceRange(text, start, end, getTilds(value.length));
@@ -113,7 +123,7 @@ let parseUrls = (text, elements, entries, media) => {
                 [`p${start}`]: element
             });
         }
-    });
+    }
 
     if (elements && Object.values(elements).filter(element => element.type === "image").length === 0) {
         let preview = Object.values(elements).find(entry => entry.type === "link-preview");
@@ -122,7 +132,6 @@ let parseUrls = (text, elements, entries, media) => {
             preview.active = true;
         }
     }
-
     return [text, elements];
 }
 

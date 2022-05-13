@@ -6,10 +6,10 @@ export default async function parseTweet(tweetJSON, fetcher) {
 
     const { data, includes } = tweetJSON;
 
-
+    let parsedText = await parser(data.text, data, includes.media);
     let tweet = {
         ...data,
-        parsedText: parser(data.text, data, includes.media),
+        parsedText: parsedText,
         users: includes.users,
         media: includes.media
     }
